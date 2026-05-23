@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Ms. Fizzy's Drink Are You? | Ms. Fizzy's Dirty Sodas</title>
+    <link rel="canonical" href="https://msfizzys.com/quiz.html">
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="description" content="Take our fun quiz to discover your perfect Ms. Fizzy's dirty soda! Find out which drink matches your personality — from the Shirley Fizz to the DR. Fizz.">
+    <meta property="og:title" content="Which Ms. Fizzy's Drink Are You?">
+    <meta property="og:description" content="Answer 4 questions to find your perfect dirty soda from Marin County's first dirty soda company.">
+    <meta property="og:image" content="https://msfizzys.com/logo.png">
+    <meta property="og:url" content="https://msfizzys.com/quiz.html">
+    <meta http-equiv="Cache-Control" content="max-age=86400">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+          href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html#home" class="nav-brand">
+            <img src="logo.png" alt="Ms. Fizzy's Dirty Sodas Logo" width="48" height="48">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">Ms. Fizzy's</span>
+                <span class="nav-brand-sub">Dirty Sodas</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="index.html#menu">Menu</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="event-request.html" class="nav-cta">Book Us</a>
+            <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#menu">Menu</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="event-request.html">Book Us</a>
+        <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <span class="section-tag">Find Your Fizz</span>
+    <h1>Which Drink Are You?</h1>
+    <p>Answer 4 questions and we'll find your perfect fizz.</p>
+</div>
+
+<!-- QUIZ -->
+<section class="quiz-section">
+    <div class="quiz-card">
+
+        <div class="quiz-progress">
+            <div class="progress-dot active" id="dot-1"></div>
+            <div class="progress-dot" id="dot-2"></div>
+            <div class="progress-dot" id="dot-3"></div>
+            <div class="progress-dot" id="dot-4"></div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="quiz-question active" id="q1">
+            <h3>Your friends would describe you as...</h3>
+            <p class="q-sub">Be honest. They're not here.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(1,'sophisticated')">🎓 The smart one who always orders dessert</button>
+                <button class="quiz-btn" onclick="answer(1,'classic')">⭐ Reliable, real, and always on time</button>
+                <button class="quiz-btn" onclick="answer(1,'wild')">🎉 The one who makes it a night</button>
+                <button class="quiz-btn" onclick="answer(1,'sunshine')">☀️ Bright, loud, and impossible not to love</button>
+            </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-question" id="q2">
+            <h3>Pick your ideal Saturday</h3>
+            <p class="q-sub">No wrong answers. Well, maybe one.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(2,'porch')">🪑 Front porch, good stories, nowhere to be</button>
+                <button class="quiz-btn" onclick="answer(2,'pool')">🏊 First one in the pool, last one out</button>
+                <button class="quiz-btn" onclick="answer(2,'brunch')">🥂 Brunch that turns into dinner somehow</button>
+                <button class="quiz-btn" onclick="answer(2,'kids')">🎠 Kids' menu, no apologies, extra cherry</button>
+            </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-question" id="q3">
+            <h3>When you walk into a room...</h3>
+            <p class="q-sub">You already know the answer.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(3,'shift')">💥 The whole vibe shifts — louder, better</button>
+                <button class="quiz-btn" onclick="answer(3,'steady')">🤝 People relax — you've got it handled</button>
+                <button class="quiz-btn" onclick="answer(3,'glow')">✨ You glow. It's just what you do.</button>
+                <button class="quiz-btn" onclick="answer(3,'laugh')">😂 Someone's already laughing before you say a word</button>
+            </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-question" id="q4">
+            <h3>What do you order at a restaurant?</h3>
+            <p class="q-sub">Every time, without even looking at the menu.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(4,'dessert')">🍰 Whatever sounds most interesting — and dessert</button>
+                <button class="quiz-btn" onclick="answer(4,'usual')">🤌 My usual. It's perfect. Why change it?</button>
+                <button class="quiz-btn" onclick="answer(4,'special')">🌟 The special — if they made it today, I want it</button>
+                <button class="quiz-btn" onclick="answer(4,'fun')">🍟 Something fun. Maybe two things. Life is short.</button>
+            </div>
+        </div>
+
+        <!-- RESULT -->
+        <div id="quiz-result">
+            <p class="result-label">You are definitely...</p>
+            <div class="result-drink" id="result-drink"></div>
+            <div class="result-tagline" id="result-tagline"></div>
+            <div class="result-divider"></div>
+            <p class="result-desc" id="result-description"></p>
+            <div class="result-btns">
+                <a href="index.html#menu" class="btn-primary">See Our Menu</a>
+                <button onclick="resetQuiz()" class="btn-outline">Take it Again!</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">Ms. Fizzy's Dirty Sodas</div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Ms. Fizzy's Dirty Sodas. All rights reserved. &nbsp;·&nbsp; Woman-owned · Marin County, CA</p>
+        </div>
+    </div>
+</footer>
+
+<script defer>
+    let answers = {};
+
+    const results = {
+        dr_fizz: {
+            drink: '🍓 The DR. Fizz',
+            tagline: '"Certified delicious."',
+            description: "She's got a PhD in flavor and a wink she can't quite hide. Sophisticated enough for the boardroom, but she'll always order dessert."
+        },
+        classic_fizz: {
+            drink: '🥤 The Classic Fizz',
+            tagline: '"Some things are classic for a reason."',
+            description: "No gimmicks, no games — just the real thing, every single time. She's the friend who shows up early and stays till the end."
+        },
+        orange_fizzsicle: {
+            drink: '🍊 The Orange Fizz-Sicle',
+            tagline: '"Squeeze the day."',
+            description: "She's the first one in the pool and the last one to stop laughing. Bright, bold, and absolutely unapologetic about it."
+        },
+        root_beer_fizz: {
+            drink: '🥤 The Root Beer Fizz',
+            tagline: '"Old soul, ice-cold pour."',
+            description: "He remembers when summers felt endless and front porches were everything. Pull up a chair — he's got a story, and it's a good one."
+        },
+        cherry_coke_fizz: {
+            drink: '🍒 The Cherry Coke Fizz',
+            tagline: '"Pop off, darling."',
+            description: "She walks in and the whole room shifts — louder, brighter, better. The night was fine before she got here, but now it's a memory."
+        },
+        shirley_fizz: {
+            drink: '🍓 The Shirley Fizz',
+            tagline: '"Growing up is optional."',
+            description: "She still orders off the kids' menu and has absolutely no regrets. Forever young, forever fizzy, forever the most fun at the table."
+        }
+    };
+
+    function answer(question, value) {
+        answers[question] = value;
+        document.getElementById('dot-' + question).classList.remove('active');
+        document.getElementById('dot-' + question).classList.add('done');
+
+        if (question < 4) {
+            document.getElementById('q' + question).classList.remove('active');
+            document.getElementById('q' + (question + 1)).classList.add('active');
+            document.getElementById('dot-' + (question + 1)).classList.add('active');
+        } else {
+            document.getElementById('q4').classList.remove('active');
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('quiz-result').style.display = 'block';
+
+        const scores = {
+            dr_fizz: 0, classic_fizz: 0, orange_fizzsicle: 0,
+            root_beer_fizz: 0, cherry_coke_fizz: 0, shirley_fizz: 0
+        };
+
+        if (answers[1] === 'sophisticated') scores.dr_fizz += 2;
+        if (answers[1] === 'classic')       { scores.classic_fizz += 2; scores.root_beer_fizz += 1; }
+        if (answers[1] === 'wild')          { scores.cherry_coke_fizz += 2; scores.shirley_fizz += 1; }
+        if (answers[1] === 'sunshine')      { scores.orange_fizzsicle += 2; scores.shirley_fizz += 1; }
+
+        if (answers[2] === 'porch')  { scores.root_beer_fizz += 2; scores.classic_fizz += 1; }
+        if (answers[2] === 'pool')   { scores.orange_fizzsicle += 2; scores.cherry_coke_fizz += 1; }
+        if (answers[2] === 'brunch') { scores.dr_fizz += 2; scores.cherry_coke_fizz += 1; }
+        if (answers[2] === 'kids')   { scores.shirley_fizz += 2; scores.orange_fizzsicle += 1; }
+
+        if (answers[3] === 'shift')  { scores.cherry_coke_fizz += 2; scores.dr_fizz += 1; }
+        if (answers[3] === 'steady') { scores.classic_fizz += 2; scores.root_beer_fizz += 1; }
+        if (answers[3] === 'glow')   { scores.dr_fizz += 2; scores.orange_fizzsicle += 1; }
+        if (answers[3] === 'laugh')  { scores.shirley_fizz += 2; scores.cherry_coke_fizz += 1; }
+
+        if (answers[4] === 'dessert') { scores.dr_fizz += 2; scores.shirley_fizz += 1; }
+        if (answers[4] === 'usual')   { scores.classic_fizz += 2; scores.root_beer_fizz += 1; }
+        if (answers[4] === 'special') { scores.orange_fizzsicle += 2; scores.cherry_coke_fizz += 1; }
+        if (answers[4] === 'fun')     { scores.shirley_fizz += 2; scores.orange_fizzsicle += 1; }
+
+        const key = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+        const r = results[key];
+        document.getElementById('result-drink').textContent = r.drink;
+        document.getElementById('result-tagline').textContent = r.tagline;
+        document.getElementById('result-description').textContent = r.description;
+    }
+
+    function resetQuiz() {
+        answers = {};
+        document.getElementById('quiz-result').style.display = 'none';
+        document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+        document.querySelectorAll('.progress-dot').forEach(d => d.classList.remove('active', 'done'));
+        document.getElementById('q1').classList.add('active');
+        document.getElementById('dot-1').classList.add('active');
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>

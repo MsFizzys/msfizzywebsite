@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Ms. Fizzy's Dirty Sodas</title>
+  <link rel="canonical" href="https://msfizzys.com/shop.html">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="description" content="Shop Ms. Fizzy's signature dirty sodas and iced coffees. Pre-order Monday–Wednesday for Friday fulfillment.">
+  <meta property="og:title" content="Shop | Ms. Fizzy's Dirty Sodas">
+  <meta property="og:url" content="https://msfizzys.com/shop.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .shop-hero { background: var(--cream); border-bottom: 3px solid var(--gold); padding: 3.5rem 1.5rem 3rem; text-align: center; }
+    .shop-hero h1 { font-family: 'Pacifico', cursive; font-size: 2.8rem; color: var(--red-bright); margin-bottom: 0.4rem; }
+    .shop-hero p { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+    .closed-banner { max-width: 600px; margin: 3rem auto; padding: 2.5rem 2rem; text-align: center; background: #fff; border: 3px solid var(--gold); border-radius: 22px; box-shadow: 0 4px 24px rgba(44,26,14,0.1); }
+    .closed-banner .closed-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .closed-banner h2 { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--red-bright); margin-bottom: 0.75rem; }
+    .closed-banner p { font-size: 0.85rem; color: var(--brown-mid); line-height: 1.6; }
+    .closed-banner .next-window { display: inline-block; margin-top: 1.25rem; background: var(--gold); color: var(--brown-dark); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.6rem 1.5rem; border-radius: 999px; }
+
+    .shop-section { background: var(--cream); padding: 4rem 1.5rem; }
+    .shop-inner { max-width: 1100px; margin: 0 auto; }
+
+    .order-window-notice { background: var(--brown-dark); color: var(--cream); border-radius: 14px; padding: 1rem 1.5rem; margin-bottom: 2.5rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-align: center; border: 2px solid var(--gold); }
+    .order-window-notice span { color: var(--gold); }
+
+    .shop-category-title { font-family: 'Pacifico', cursive; font-size: 1.6rem; color: var(--brown-dark); margin: 2.5rem 0 0.4rem; }
+    .shop-category-sub { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.75rem; margin-bottom: 3rem; }
+    .product-card { background: #fff; border: 2px solid var(--gold); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(44,26,14,0.08); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(44,26,14,0.14); }
+    .product-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-bottom: 2px solid var(--gold); }
+    .product-info { padding: 1.1rem 1.1rem 1rem; flex: 1; display: flex; flex-direction: column; }
+    .product-name { font-family: 'Pacifico', cursive; font-size: 1rem; color: var(--brown-dark); margin-bottom: 0.2rem; }
+    .product-desc { font-size: 0.72rem; color: var(--brown-mid); margin-bottom: 0.6rem; flex: 1; line-height: 1.5; }
+    .product-price { font-size: 1rem; font-weight: 800; color: var(--coral); margin-bottom: 0.85rem; }
+    .add-to-cart-btn { width: 100%; background: var(--coral); color: var(--cream); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1rem; border-radius: 999px; border: 2px solid var(--coral-light); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; }
+    .add-to-cart-btn:hover { background: var(--coral-light); color: var(--brown-dark); }
+    .add-to-cart-btn.added { background: var(--gold); border-color: var(--gold); color: var(--brown-dark); }
+
+    /* ── BUNDLE BANNER ── */
+    .bundle-banner { background: var(--coral); color: var(--cream); border-radius: 14px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; text-align: center; border: 2px solid var(--coral-light); }
+    .bundle-banner strong { font-size: 1rem; display: block; margin-bottom: 0.2rem; }
+    .bundle-banner span { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
+
+    /* ── CUSTOM DRINK BUILDER ── */
+    .custom-builder { background: #fff; border: 2px solid var(--gold); border-radius: 22px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(44,26,14,0.08); }
+    .custom-builder h3 { font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--red-bright); margin-bottom: 0.3rem; }
+    .custom-builder .builder-sub { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+
+    .builder-section { margin-bottom: 1.5rem; }
+    .builder-section label { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown-mid); margin-bottom: 0.5rem; }
+    .builder-section .optional-tag { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.65rem; color: var(--coral); }
+
+    .chip-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { padding: 0.45rem 0.9rem; border-radius: 999px; border: 2px solid var(--gold); background: var(--cream); font-size: 0.7rem; font-weight: 700; color: var(--brown-dark); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.18s; user-select: none; }
+    .chip:hover { background: var(--cream-dark); }
+    .chip.selected { background: var(--gold); border-color: var(--gold); color: var(--brown-dark); }
+    .chip.extra-cost { border-color: var(--coral); }
+    .chip.extra-cost.selected { background: var(--coral); border-color: var(--coral); color: var(--cream); }
+
+    .builder-select { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--brown-dark); background: #fff; transition: border-color 0.2s; }
+    .builder-select:focus { outline: none; border-color: var(--gold); }
+
+    .custom-price-display { font-size: 0.85rem; font-weight: 800; color: var(--coral); margin-top: 1rem; margin-bottom: 1rem; }
+    .add-custom-btn { background: var(--coral); color: var(--cream); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem 2rem; border-radius: 999px; border: 2px solid var(--coral-light); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; }
+    .add-custom-btn:hover { background: var(--coral-light); color: var(--brown-dark); }
+
+    /* ── CART BAR ── */
+    .cart-bar { position: sticky; top: 70px; z-index: 40; background: var(--brown-dark); color: var(--cream); border-bottom: 3px solid var(--gold); padding: 0.75rem 1.5rem; display: none; }
+    .cart-bar.visible { display: block; }
+    .cart-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .cart-bar-text { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
+    .cart-bar-text span { color: var(--gold); }
+    .view-cart-btn { background: var(--coral); color: var(--cream); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 1.25rem; border-radius: 999px; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; }
+    .view-cart-btn:hover { background: var(--coral-light); }
+
+    /* ── CHECKOUT PANEL ── */
+    .checkout-overlay { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(44,26,14,0.55); backdrop-filter: blur(3px); }
+    .checkout-overlay.open { display: flex; align-items: flex-start; justify-content: flex-end; }
+    .checkout-panel { background: var(--cream); width: 100%; max-width: 480px; height: 100vh; overflow-y: auto; padding: 2rem 1.75rem; border-left: 3px solid var(--gold); box-shadow: -8px 0 40px rgba(44,26,14,0.18); }
+    .checkout-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; }
+    .checkout-header h2 { font-family: 'Pacifico', cursive; font-size: 1.6rem; color: var(--red-bright); }
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--brown-dark); line-height: 1; }
+
+    .cart-items { margin-bottom: 1.5rem; }
+    .cart-item { display: flex; align-items: flex-start; gap: 0.85rem; padding: 0.75rem 0; border-bottom: 1px solid var(--cream-dark); }
+    .cart-item-img { width: 52px; height: 52px; object-fit: cover; border-radius: 10px; border: 1.5px solid var(--gold); flex-shrink: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: 700; font-size: 0.82rem; color: var(--brown-dark); }
+    .cart-item-detail { font-size: 0.68rem; color: var(--brown-mid); line-height: 1.5; margin-top: 0.15rem; }
+    .cart-item-price { font-size: 0.75rem; color: var(--coral); font-weight: 700; margin-top: 0.2rem; }
+    .cart-item-controls { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+    .qty-btn { background: var(--cream-dark); border: 1.5px solid var(--gold); border-radius: 6px; width: 26px; height: 26px; cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--brown-dark); }
+    .qty-btn:hover { background: var(--gold); }
+    .qty-display { font-weight: 800; font-size: 0.85rem; min-width: 20px; text-align: center; }
+
+    .cart-totals { border-top: 2px solid var(--gold); padding-top: 1rem; margin-bottom: 1.5rem; }
+    .total-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; padding: 0.25rem 0; color: var(--brown-mid); }
+    .total-row.grand { font-size: 1rem; font-weight: 800; color: var(--brown-dark); border-top: 1px solid var(--cream-dark); margin-top: 0.5rem; padding-top: 0.5rem; }
+    .total-row.grand span:last-child { color: var(--coral); }
+    .delivery-fee-row { display: none; }
+    .delivery-fee-row.visible { display: flex; }
+    .bundle-saving-row { display: none; color: #217a21; }
+    .bundle-saving-row.visible { display: flex; }
+
+    .fulfillment-toggle { display: flex; gap: 0; margin-bottom: 1.25rem; border: 2px solid var(--gold); border-radius: 12px; overflow: hidden; }
+    .fulfillment-btn { flex: 1; padding: 0.7rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; background: transparent; color: var(--brown-mid); transition: all 0.2s; }
+    .fulfillment-btn.active { background: var(--gold); color: var(--brown-dark); }
+
+    .delivery-fields { display: none; }
+    .delivery-fields.visible { display: block; }
+
+    .checkout-form h3 { font-family: 'Pacifico', cursive; font-size: 1.2rem; color: var(--brown-dark); margin-bottom: 1rem; }
+    .form-row { margin-bottom: 1rem; }
+    .form-row label { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown-mid); margin-bottom: 0.35rem; }
+    .form-row input, .form-row textarea { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--brown-dark); background: #fff; transition: border-color 0.2s; box-sizing: border-box; }
+    .form-row input:focus, .form-row textarea:focus { outline: none; border-color: var(--gold); }
+    .form-row textarea { resize: vertical; min-height: 80px; }
+
+    .novato-note { background: var(--cream-dark); border: 1.5px solid var(--gold); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.75rem; color: var(--brown-mid); margin-bottom: 1rem; line-height: 1.5; }
+    .pickup-note { background: var(--cream-dark); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.75rem; color: var(--brown-mid); margin-bottom: 1rem; line-height: 1.5; border: 1.5px solid var(--gold); }
+
+    #card-container { margin-bottom: 1.25rem; min-height: 90px; }
+    .pay-btn { width: 100%; background: var(--coral); color: var(--cream); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem; border-radius: 999px; border: 2px solid var(--coral-light); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; margin-top: 0.5rem; }
+    .pay-btn:hover:not(:disabled) { background: var(--coral-light); color: var(--brown-dark); }
+    .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .payment-message { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-align: center; display: none; }
+    .payment-message.error { background: #fde8e8; color: #c0392b; border: 1.5px solid #c0392b; display: block; }
+    .payment-message.success { background: #e8f8e8; color: #217a21; border: 1.5px solid #217a21; display: block; }
+
+    @media (max-width: 600px) {
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 1rem; }
+      .checkout-panel { max-width: 100%; border-left: none; border-top: 3px solid var(--gold); }
+      .checkout-overlay { align-items: flex-end; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="logo.png" alt="Ms. Fizzy's Dirty Sodas Logo" width="48" height="48">
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">Ms. Fizzy's</span>
+        <span class="nav-brand-sub">Dirty Sodas</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="event-request.html" class="nav-cta">Book Us</a>
+      <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Follow Ms. Fizzy's on Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+    </div>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="index.html#menu">Menu</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="shop.html">Shop</a>
+    <a href="event-request.html">Book Us</a>
+  </div>
+</nav>
+
+<div class="cart-bar" id="cart-bar">
+  <div class="cart-bar-inner">
+    <p class="cart-bar-text">🛒 <span id="cart-count">0</span> item(s) — <span id="cart-bar-total">$0.00</span></p>
+    <button class="view-cart-btn" onclick="openCheckout()">View Cart & Checkout</button>
+  </div>
+</div>
+
+<section class="shop-hero">
+  <h1>The Shop</h1>
+  <p>Pre-orders open Monday – Wednesday · Pickup or Novato Delivery on Friday</p>
+</section>
+
+<section class="shop-section" id="shop-content">
+  <div class="shop-inner">
+
+    <div class="closed-banner" id="closed-banner" style="display:none;">
+      <div class="closed-icon">🥤</div>
+      <h2>Orders Are Closed</h2>
+      <p>We accept pre-orders <strong>Monday through Wednesday until midnight.</strong><br>
+         Orders are fulfilled every <strong>Friday</strong> via pickup or Novato delivery.</p>
+      <span class="next-window" id="next-window-text">Next ordering window opens Monday</span>
+    </div>
+
+    <div id="shop-open-content" style="display:none;">
+      <div class="order-window-notice">
+        🟢 Orders are open! Pre-order now for <span>Friday fulfillment</span> · Window closes <span>Wednesday at midnight</span>
+      </div>
+
+      <!-- DIRTY SODAS -->
+      <h2 class="shop-category-title">Dirty Soda DIY Kits</h2>
+      <p class="shop-category-sub">24oz · $10 each · Includes cups, straws, syrups, soda & cream top — just add ice!</p>
+      <div class="product-grid" id="soda-grid"></div>
+
+      <!-- 12oz BOTTLES -->
+      <h2 class="shop-category-title">12oz Bottles</h2>
+      <p class="shop-category-sub">$5 each · Mix & match any 6 for $24</p>
+      <div class="bundle-banner">
+        <strong>🎉 Mix & Match Bundle Deal</strong>
+        <span>Any 6 bottles for $24 — automatically applied at checkout</span>
+      </div>
+      <div class="product-grid" id="bottle-grid"></div>
+
+      <!-- CUSTOM DRINKS -->
+      <h2 class="shop-category-title">Build Your Own Drink</h2>
+      <p class="shop-category-sub">24oz · Starting at $10 · Make it exactly how you want it</p>
+      <div class="custom-builder">
+        <h3>Custom Drink Builder</h3>
+        <p class="builder-sub">$10 base · Extra syrups +$0.50 · Extra garnishes +$0.25</p>
+
+        <div class="builder-section">
+          <label>Choose Your Soda <span style="color:var(--coral);font-size:0.65rem;">*Required</span></label>
+          <div class="chip-group" id="soda-chips"></div>
+        </div>
+
+        <div class="builder-section">
+          <label>Choose Syrups <span class="optional-tag">(Optional · First 2 free, +$0.50 each after)</span></label>
+          <div class="chip-group" id="syrup-chips"></div>
+        </div>
+
+        <div class="builder-section">
+          <label>Cream Top Flavor <span class="optional-tag">(Optional)</span></label>
+          <div class="chip-group" id="cream-chips"></div>
+        </div>
+
+        <div class="builder-section">
+          <label>Garnishes <span class="optional-tag">(Optional · First free, +$0.25 each after)</span></label>
+          <div class="chip-group" id="garnish-chips-custom"></div>
+        </div>
+
+        <div class="custom-price-display" id="custom-price-display">Total: $10.00</div>
+        <button class="add-custom-btn" onclick="addCustomToCart()">Add Custom Drink to Cart</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT OVERLAY -->
+<div class="checkout-overlay" id="checkout-overlay" onclick="handleOverlayClick(event)">
+  <div class="checkout-panel" id="checkout-panel">
+    <div class="checkout-header">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="closeCheckout()">✕</button>
+    </div>
+
+    <div class="cart-items" id="cart-items-list"></div>
+
+    <div class="cart-totals">
+      <div class="total-row"><span>Subtotal</span><span id="subtotal-display">$0.00</span></div>
+      <div class="total-row bundle-saving-row" id="bundle-saving-row"><span>🎉 Bundle Discount</span><span id="bundle-saving-amount">-$0.00</span></div>
+      <div class="total-row delivery-fee-row" id="delivery-fee-row"><span>Delivery Fee</span><span>$10.00</span></div>
+      <div class="total-row grand"><span>Total</span><span id="cart-total-display">$0.00</span></div>
+    </div>
+
+    <div class="checkout-form">
+      <h3>Fulfillment</h3>
+      <div class="fulfillment-toggle">
+        <button class="fulfillment-btn active" id="btn-pickup" onclick="setFulfillment('pickup')">🧃 Pickup</button>
+        <button class="fulfillment-btn" id="btn-delivery" onclick="setFulfillment('delivery')">🚗 Delivery (+$10)</button>
+      </div>
+
+      <div class="pickup-note" id="pickup-note">
+        📍 We'll contact you with your pickup location and time after your order is placed.
+      </div>
+
+      <div class="delivery-fields" id="delivery-fields">
+        <div class="novato-note">🗺️ We currently deliver to <strong>Novato only</strong>. Please confirm your address is in Novato before placing your order.</div>
+        <div class="form-row">
+          <label for="delivery-address">Delivery Address (Novato only)</label>
+          <input type="text" id="delivery-address" placeholder="123 Main St, Novato, CA" autocomplete="street-address">
+        </div>
+        <div class="form-row">
+          <label for="delivery-instructions">Delivery Instructions <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.65rem;">(optional)</span></label>
+          <textarea id="delivery-instructions" placeholder="Gate code, leave at door, call when arriving..."></textarea>
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.25rem;">Your Info</h3>
+      <div class="form-row">
+        <label for="customer-name">Full Name</label>
+        <input type="text" id="customer-name" placeholder="Your name" autocomplete="name">
+      </div>
+      <div class="form-row">
+        <label for="customer-email">Email</label>
+        <input type="email" id="customer-email" placeholder="you@email.com" autocomplete="email">
+      </div>
+
+      <h3 style="margin-top:1.25rem;">Payment</h3>
+      <div id="card-container"></div>
+      <div class="payment-message" id="payment-message"></div>
+      <button class="pay-btn" id="pay-btn" onclick="handlePayment()">Pay Now</button>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--brown-dark);color:var(--cream);text-align:center;padding:2rem 1.5rem;border-top:3px solid var(--gold);">
+  <p style="font-family:'Pacifico',cursive;font-size:1.2rem;color:var(--gold);margin-bottom:0.4rem;">Ms. Fizzy's</p>
+  <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.7;">Marin County's First Dirty Soda Company</p>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.55;">© 2025 Ms. Fizzy's Dirty Sodas. All rights reserved.</p>
+</footer>
+
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+<script>
+  // ── ORDERING WINDOW ──
+ function isOrderingOpen() {
+    return true;
+  }
+
+  function initShop() {
+    if (isOrderingOpen()) {
+      document.getElementById("shop-open-content").style.display = "block";
+      document.getElementById("closed-banner").style.display = "none";
+      renderAllProducts();
+      renderCustomBuilder();
+    } else {
+      document.getElementById("closed-banner").style.display = "block";
+      document.getElementById("shop-open-content").style.display = "none";
+      const day = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" })).getDay();
+      document.getElementById("next-window-text").textContent = day === 4 ? "Next ordering window opens this Monday" : "Next ordering window opens Monday";
+    }
+  }
+
+  // ── DATA ──
+  const SODAS = [
+    { id: "cherry-coke-fizz", name: "Cherry Coke Fizz", desc: "24oz DIY kit · Cherry coke dirty soda", price: 10, img: "cherry-coke-fizz.webp", type: "soda" },
+    { id: "classic-fizz", name: "Classic Fizz", desc: "24oz DIY kit · Our signature dirty soda", price: 10, img: "classic-fizz.webp", type: "soda" },
+    { id: "dr-fizz", name: "Dr. Fizz", desc: "24oz DIY kit · Dr. Pepper-inspired dirty soda", price: 10, img: "dr-fizz.webp", type: "soda" },
+    { id: "orange-fizzsicle", name: "Orange Fizzsicle", desc: "24oz DIY kit · Creamy orange dreamsicle soda", price: 10, img: "orange-fizzsicle.webp", type: "soda" },
+    { id: "root-beer-fizz", name: "Root Beer Fizz", desc: "24oz DIY kit · Classic root beer dirty soda", price: 10, img: "root-beer-fizz.webp", type: "soda" },
+    { id: "shirley-fizz", name: "Shirley Fizz", desc: "24oz DIY kit · Grenadine & ginger ale fizz", price: 10, img: "shirley-fizz.webp", type: "soda" },
+    { id: "limoncello-coconut-fizz", name: "Limoncello Coconut", desc: "24oz DIY kit · Tropical citrus coconut refresher", price: 10, img: "limoncello-coconut-fizz.webp", type: "soda" },
+    { id: "unicorn-lemonade", name: "Unicorn Lemonade", desc: "24oz DIY kit · Colorful, sweet & magical", price: 10, img: "unicorn-lemonade.webp", type: "soda" },
+    { id: "fizz-with-wings", name: "Fizz with Wings", desc: "24oz DIY kit · Energizing dirty soda twist", price: 10, img: "fizz-with-wings.webp", type: "soda" },
+  ];
+
+  const BOTTLES = [
+    { id: "caramel-iced-coffee", name: "Caramel Iced Coffee", desc: "12oz bottle · Rich iced coffee with velvety caramel", price: 5, img: "caramel-iced-coffee.webp", type: "bottle" },
+    { id: "chocovanilla-iced-coffee", name: "Choco Vanilla Coffee", desc: "12oz bottle · Chocolate and vanilla cold brew", price: 5, img: "chocovanilla-iced-coffee.webp", type: "bottle" },
+    { id: "green-juice", name: "Green Juice", desc: "12oz bottle · Fresh pressed green goodness", price: 5, img: "classic-fizz.webp", type: "bottle" },
+    { id: "strawberry-lemonade", name: "Strawberry Lemonade", desc: "12oz bottle · Sweet strawberry & tangy lemon", price: 5, img: "shirley-fizz.webp", type: "bottle" },
+  ];
+
+  const SODA_OPTIONS = ["Dr Pepper", "Coke", "Diet Coke", "Orange Fanta", "Sprite"];
+  const SYRUP_OPTIONS = ["Vanilla", "Strawberry", "Watermelon", "Guava", "Peach", "Raspberry", "Pineapple", "Banana", "Toasted Marshmallow", "Cherry", "Coconut", "Mango"];
+  const GARNISH_OPTIONS = ["Cherries", "Sprinkles", "Cookie Crumbles", "Freeze Dried Strawberry", "Freeze Dried Pineapple"];
+
+  let SQUARE_APP_ID = null;
+  let SQUARE_LOCATION_ID = null;
+  const DELIVERY_FEE = 10;
+  const BUNDLE_COUNT = 6;
+  const BUNDLE_PRICE = 24;
+  const SYRUP_FREE = 2;
+  const SYRUP_EXTRA_COST = 0.50;
+  const GARNISH_FREE = 1;
+  const GARNISH_EXTRA_COST = 0.25;
+
+  let cart = []; // array of {id, name, img, price, qty, detail, type}
+  let card;
+  let fulfillment = "pickup";
+
+  // Custom builder state
+  let selectedSoda = null;
+  let selectedSyrups = [];
+  let selectedCream = null;
+  let selectedGarnishesCustom = [];
+
+  // ── RENDER PRODUCTS ──
+  function renderAllProducts() {
+    renderGrid("soda-grid", SODAS, true);
+    renderGrid("bottle-grid", BOTTLES, false);
+  }
+
+  function renderGrid(gridId, products, hasGarnish) {
+    document.getElementById(gridId).innerHTML = products.map(p => `
+      <div class="product-card">
+        <img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="product-price">$${p.price.toFixed(2)}</div>
+          ${hasGarnish ? `
+            <div style="margin-bottom:0.75rem;">
+              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Add Garnish <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
+              <div class="chip-group" id="garnish-${p.id}" style="gap:0.35rem;"></div>
+            </div>
+          ` : ""}
+          <button class="add-to-cart-btn" id="btn-${p.id}" onclick="addProductToCart('${p.id}')">Add to Cart</button>
+        </div>
+      </div>
+    `).join("");
+
+    if (hasGarnish) {
+      products.forEach(p => {
+        const container = document.getElementById(`garnish-${p.id}`);
+        if (!container) return;
+        GARNISH_OPTIONS.forEach(g => {
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          chip.textContent = g;
+          chip.style.fontSize = "0.6rem";
+          chip.style.padding = "0.3rem 0.6rem";
+          chip.onclick = () => chip.classList.toggle("selected");
+          container.appendChild(chip);
+        });
+      });
+    }
+  }
+
+  // ── CUSTOM BUILDER ──
+  function renderCustomBuilder() {
+    renderChips("soda-chips", SODA_OPTIONS, "soda");
+    renderChips("syrup-chips", SYRUP_OPTIONS, "syrup");
+    renderChips("cream-chips", SYRUP_OPTIONS, "cream");
+    renderChips("garnish-chips-custom", GARNISH_OPTIONS, "garnish-custom");
+  }
+
+  function renderChips(containerId, options, type) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    options.forEach(opt => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = opt;
+      chip.onclick = () => toggleChip(chip, opt, type);
+      container.appendChild(chip);
+    });
+  }
+
+  function toggleChip(chip, value, type) {
+    if (type === "soda") {
+      document.querySelectorAll("#soda-chips .chip").forEach(c => c.classList.remove("selected"));
+      chip.classList.add("selected");
+      selectedSoda = value;
+    } else if (type === "syrup") {
+      if (chip.classList.contains("selected")) {
+        chip.classList.remove("selected", "extra-cost");
+        selectedSyrups = selectedSyrups.filter(s => s !== value);
+      } else {
+        selectedSyrups.push(value);
+        chip.classList.add("selected");
+        if (selectedSyrups.length > SYRUP_FREE) chip.classList.add("extra-cost");
+      }
+      // Re-mark extra cost chips
+      const syrupChips = [...document.querySelectorAll("#syrup-chips .chip.selected")];
+      syrupChips.forEach((c, i) => {
+        if (i >= SYRUP_FREE) c.classList.add("extra-cost");
+        else c.classList.remove("extra-cost");
+      });
+    } else if (type === "cream") {
+      if (chip.classList.contains("selected")) {
+        chip.classList.remove("selected");
+        selectedCream = null;
+      } else {
+        document.querySelectorAll("#cream-chips .chip").forEach(c => c.classList.remove("selected"));
+        chip.classList.add("selected");
+        selectedCream = value;
+      }
+    } else if (type === "garnish-custom") {
+      if (chip.classList.contains("selected")) {
+        chip.classList.remove("selected", "extra-cost");
+        selectedGarnishesCustom = selectedGarnishesCustom.filter(g => g !== value);
+      } else {
+        selectedGarnishesCustom.push(value);
+        chip.classList.add("selected");
+        if (selectedGarnishesCustom.length > GARNISH_FREE) chip.classList.add("extra-cost");
+      }
+      const garnishChips = [...document.querySelectorAll("#garnish-chips-custom .chip.selected")];
+      garnishChips.forEach((c, i) => {
+        if (i >= GARNISH_FREE) c.classList.add("extra-cost");
+        else c.classList.remove("extra-cost");
+      });
+    }
+    updateCustomPrice();
+  }
+
+  function getCustomPrice() {
+    let price = 10;
+    const extraSyrups = Math.max(0, selectedSyrups.length - SYRUP_FREE);
+    price += extraSyrups * SYRUP_EXTRA_COST;
+    const extraGarnishes = Math.max(0, selectedGarnishesCustom.length - GARNISH_FREE);
+    price += extraGarnishes * GARNISH_EXTRA_COST;
+    return price;
+  }
+
+  function updateCustomPrice() {
+    document.getElementById("custom-price-display").textContent = `Total: $${getCustomPrice().toFixed(2)}`;
+  }
+
+  function addCustomToCart() {
+    if (!selectedSoda) { alert("Please choose a soda first!"); return; }
+    const price = getCustomPrice();
+    const details = [];
+    details.push(`Soda: ${selectedSoda}`);
+    if (selectedSyrups.length) details.push(`Syrups: ${selectedSyrups.join(", ")}`);
+    if (selectedCream) details.push(`Cream Top: ${selectedCream}`);
+    if (selectedGarnishesCustom.length) details.push(`Garnishes: ${selectedGarnishesCustom.join(", ")}`);
+
+    addToCartItem({
+      id: `custom-${Date.now()}`,
+      name: "Custom Drink",
+      img: "classic-fizz.webp",
+      price,
+      detail: details.join(" · "),
+      type: "custom",
+      qty: 1,
+    });
+
+    // Reset builder
+    selectedSoda = null; selectedSyrups = []; selectedCream = null; selectedGarnishesCustom = [];
+    document.querySelectorAll("#soda-chips .chip, #syrup-chips .chip, #cream-chips .chip, #garnish-chips-custom .chip").forEach(c => c.classList.remove("selected", "extra-cost"));
+    updateCustomPrice();
+  }
+
+  // ── ADD PRODUCT TO CART ──
+  function addProductToCart(id) {
+    const product = [...SODAS, ...BOTTLES].find(p => p.id === id);
+    if (!product) return;
+
+    // Collect garnishes if soda
+    let garnishes = [];
+    if (product.type === "soda") {
+      const container = document.getElementById(`garnish-${id}`);
+      if (container) {
+        garnishes = [...container.querySelectorAll(".chip.selected")].map(c => c.textContent);
+      }
+    }
+
+    let garnishCost = 0;
+    if (garnishes.length > 0) {
+      garnishCost = Math.max(0, garnishes.length - GARNISH_FREE) * GARNISH_EXTRA_COST;
+    }
+
+    const detail = garnishes.length ? `Garnishes: ${garnishes.join(", ")}` : "";
+
+    addToCartItem({
+      id: `${id}-${Date.now()}`,
+      productId: id,
+      name: product.name,
+      img: product.img,
+      price: product.price + garnishCost,
+      detail,
+      type: product.type,
+      qty: 1,
+    });
+
+    const btn = document.getElementById(`btn-${id}`);
+    btn.textContent = "Added! ✓"; btn.classList.add("added");
+    setTimeout(() => { btn.textContent = "Add to Cart"; btn.classList.remove("added"); }, 1500);
+  }
+
+  function addToCartItem(item) {
+    cart.push(item);
+    updateCartUI();
+  }
+
+  // ── BUNDLE CALCULATION ──
+  function getBundleInfo() {
+    const bottleItems = cart.filter(i => i.type === "bottle");
+    const bottleCount = bottleItems.reduce((s, i) => s + i.qty, 0);
+    const bundles = Math.floor(bottleCount / BUNDLE_COUNT);
+    const saving = bundles > 0 ? (bundles * BUNDLE_COUNT * 5) - (bundles * BUNDLE_PRICE) : 0;
+    return { bundles, saving };
+  }
+
+  function getSubtotal() {
+    return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function getTotal() {
+    const { saving } = getBundleInfo();
+    return getSubtotal() - saving + (fulfillment === "delivery" ? DELIVERY_FEE : 0);
+  }
+
+  function getCartCount() {
+    return cart.reduce((s, i) => s + i.qty, 0);
+  }
+
+  function updateCartUI() {
+    const count = getCartCount();
+    const { saving } = getBundleInfo();
+    const subtotal = getSubtotal();
+    const total = getTotal();
+
+    document.getElementById("cart-count").textContent = count;
+    document.getElementById("cart-bar-total").textContent = `$${total.toFixed(2)}`;
+    document.getElementById("subtotal-display").textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById("cart-total-display").textContent = `$${total.toFixed(2)}`;
+    document.getElementById("cart-bar").classList.toggle("visible", count > 0);
+
+    const bundleRow = document.getElementById("bundle-saving-row");
+    if (saving > 0) {
+      bundleRow.classList.add("visible");
+      document.getElementById("bundle-saving-amount").textContent = `-$${saving.toFixed(2)}`;
+    } else {
+      bundleRow.classList.remove("visible");
+    }
+  }
+
+  function renderCartItems() {
+    const list = document.getElementById("cart-items-list");
+    if (cart.length === 0) {
+      list.innerHTML = `<p style="text-align:center;color:var(--brown-mid);font-size:0.85rem;padding:2rem 0;">Your cart is empty.</p>`;
+      return;
+    }
+    list.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          ${item.detail ? `<div class="cart-item-detail">${item.detail}</div>` : ""}
+          <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+        </div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${idx}, -1)">−</button>
+          <span class="qty-display">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function changeQty(idx, delta) {
+    cart[idx].qty += delta;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    updateCartUI();
+    renderCartItems();
+  }
+
+  // ── FULFILLMENT ──
+  function setFulfillment(type) {
+    fulfillment = type;
+    document.getElementById("btn-pickup").classList.toggle("active", type === "pickup");
+    document.getElementById("btn-delivery").classList.toggle("active", type === "delivery");
+    document.getElementById("delivery-fields").classList.toggle("visible", type === "delivery");
+    document.getElementById("pickup-note").style.display = type === "pickup" ? "block" : "none";
+    document.getElementById("delivery-fee-row").classList.toggle("visible", type === "delivery");
+    updateCartUI();
+  }
+
+  // ── CHECKOUT ──
+  async function openCheckout() {
+    renderCartItems();
+    updateCartUI();
+    document.getElementById("checkout-overlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+    if (!card) await initSquare();
+  }
+
+  function closeCheckout() {
+    document.getElementById("checkout-overlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById("checkout-overlay")) closeCheckout();
+  }
+
+  async function initSquare() {
+    if (!window.Square) { console.error("Square SDK not loaded"); return; }
+    const payments = window.Square.payments(SQUARE_APP_ID, SQUARE_LOCATION_ID);
+    card = await payments.card();
+    await card.attach("#card-container");
+  }
+
+  async function handlePayment() {
+    if (cart.length === 0) return;
+    if (fulfillment === "delivery" && !document.getElementById("delivery-address").value.trim()) {
+      const msg = document.getElementById("payment-message");
+      msg.textContent = "Please enter your Novato delivery address.";
+      msg.className = "payment-message error";
+      return;
+    }
+
+    const btn = document.getElementById("pay-btn");
+    const msg = document.getElementById("payment-message");
+    btn.disabled = true; btn.textContent = "Processing...";
+    msg.className = "payment-message"; msg.style.display = "none";
+
+    try {
+      const result = await card.tokenize();
+      if (result.status !== "OK") throw new Error(result.errors?.[0]?.message || "Card error");
+
+      const { saving } = getBundleInfo();
+      const response = await fetch("/.netlify/functions/process-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sourceId: result.token,
+          amount: Math.round(getTotal() * 100),
+          items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price, detail: i.detail || "" })),
+          bundleSaving: saving,
+          fulfillment,
+          deliveryAddress: fulfillment === "delivery" ? document.getElementById("delivery-address").value.trim() : null,
+          deliveryInstructions: fulfillment === "delivery" ? document.getElementById("delivery-instructions").value.trim() : null,
+          customerName: document.getElementById("customer-name").value,
+          customerEmail: document.getElementById("customer-email").value,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        msg.textContent = `🎉 Order placed! We'll contact you with your ${fulfillment} details. See you Friday!`;
+        msg.className = "payment-message success";
+        cart = [];
+        updateCartUI();
+        renderCartItems();
+        setTimeout(closeCheckout, 4000);
+      } else {
+        throw new Error(data.error || "Payment failed");
+      }
+    } catch (err) {
+      msg.textContent = `Payment failed: ${err.message}`;
+      msg.className = "payment-message error";
+    }
+
+    btn.disabled = false; btn.textContent = "Pay Now";
+  }
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const btn = document.getElementById("hamburger-btn");
+    const open = menu.style.display === "block";
+    menu.style.display = open ? "none" : "block";
+    btn.setAttribute("aria-expanded", !open);
+  }
+
+  // Fetch config then init
+  fetch("/.netlify/functions/get-config")
+    .then(r => r.json())
+    .then(config => {
+      SQUARE_APP_ID = config.applicationId;
+      SQUARE_LOCATION_ID = config.locationId;
+      initShop();
+    })
+    .catch(err => {
+      console.error("Failed to load config:", err);
+      initShop(); // still init shop UI even if Square fails
+    });
+</script>
+</body>
+</html>

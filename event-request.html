@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ms. Fizzy's For Your Event | Marin County Dirty Soda Bar</title>
+    <link rel="canonical" href="https://msfizzys.com/event-request.html">
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="description" content="Book Ms. Fizzy's mobile dirty soda cart for your next birthday party, wedding, corporate event, or fundraiser in Marin County and the North Bay Area.">
+    <meta property="og:title" content="Book Ms. Fizzy's For Your Event">
+    <meta property="og:description" content="Hire Marin County's first dirty soda company for birthdays, weddings, corporate events & more.">
+    <meta property="og:image" content="https://msfizzys.com/logo.png">
+    <meta property="og:url" content="https://msfizzys.com/event-request.html">
+    <meta http-equiv="Cache-Control" content="max-age=86400">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+          href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html#home" class="nav-brand">
+            <img src="logo.png" alt="Ms. Fizzy's Dirty Sodas Logo" width="48" height="48">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">Ms. Fizzy's</span>
+                <span class="nav-brand-sub">Dirty Sodas</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="index.html#menu">Menu</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="event-request.html" class="nav-cta">Book Us</a>
+            <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#menu">Menu</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="event-request.html">Book Us</a>
+        <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <span class="section-tag">Let's Party</span>
+    <h1>Book Ms. Fizzy's!</h1>
+    <p>Fill out the form below and we'll get back to you as soon as possible to confirm your booking!</p>
+</div>
+
+<!-- FORM -->
+<section class="form-section">
+    <div class="form-card">
+        <form action="https://formspree.io/f/mnjbkvap" method="POST">
+            <input type="hidden" name="_next" value="https://msfizzys.com/thankyou.html">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Full name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="start_time">Event Start Time *</label>
+                    <input type="time" id="start_time" name="start_time" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="event_type">Type of Event *</label>
+                    <select id="event_type" name="event_type" required>
+                        <option value="">Select event type...</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Baby Shower">Baby Shower</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Fundraiser">Fundraiser</option>
+                        <option value="School Event">School Event</option>
+                        <option value="DIY Ms. Fizzy kit 0-29 Drinks">DIY Ms. Fizzy kit 0-29 Drinks</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="event_date">Event Date *</label>
+                    <input type="date" id="event_date" name="event_date" required>
+                </div>
+            </div>
+    
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="drinks">Estimated Drinks *</label>
+                    <select id="drinks" name="drinks" required>
+                        <option value="">Select drink count...</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200+">200+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="location">Event City *</label>
+                    <input type="text" id="location" name="location" required placeholder="City, CA">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="referral">How did you hear about us? *</label>
+                <select id="referral" name="referral" required onchange="toggleOtherReferral()">
+                    <option value="">Select an option...</option>
+                    <option value="Google search">Google search</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Word of Mouth">Word of Mouth</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="other-referral-group" style="display:none;">
+                <label for="other_referral">Please specify</label>
+                <input type="text" id="other_referral" name="other_referral" placeholder="Tell us more">
+            </div>
+
+            <script>
+            function toggleOtherReferral() {
+                const select = document.getElementById('referral');
+                const otherGroup = document.getElementById('other-referral-group');
+                if (select.value === "Other") {
+                    otherGroup.style.display = "block";
+                } else {
+                    otherGroup.style.display = "none";
+                }
+            }
+            </script>
+
+            <div class="form-group">
+                <label for="message">Additional Notes</label>
+                <textarea id="message" name="message" placeholder="Tell us anything else about your event..."></textarea>
+            </div>
+
+            <div class="form-submit">
+                <button type="submit" class="btn-primary">Submit Request 🥤</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">Ms. Fizzy's Dirty Sodas</div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Ms. Fizzy's Dirty Sodas. All rights reserved. &nbsp;·&nbsp; Woman-owned · Marin County, CA</p>
+        </div>
+    </div>
+</footer>
+
+<script defer>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>

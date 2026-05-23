@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms. Fizzy's | Marin County's First Dirty Soda Company</title>
+    <link rel="canonical" href="https://msfizzys.com/">
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="description" content="Ms. Fizzy's Dirty Sodas — Marin County's first dirty soda company. Mobile pop-up cart for birthdays, weddings, and events. Book us for your next event!">
+    <meta name="keywords" content="dirty soda Marin County, dirty soda North Bay, mobile beverage cart Marin, soda bar event catering, Ms Fizzys, party drinks Marin County">
+    <meta property="og:title" content="Ms. Fizzy's | Marin County's First Dirty Soda Company">
+    <meta property="og:description" content="Mobile dirty soda cart for birthdays, weddings, corporate events & more. Serving Marin County and the North Bay Area.">
+    <meta property="og:image" content="https://msfizzys.com/logo.png">
+    <meta property="og:url" content="https://msfizzys.com/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta http-equiv="Cache-Control" content="max-age=86400">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FoodEstablishment",
+      "name": "Ms. Fizzy's Dirty Sodas",
+      "description": "Marin County's first dirty soda company. Mobile pop-up beverage cart for birthdays, weddings, corporate events, and more.",
+      "url": "https://msfizzys.com",
+      "logo": "https://msfizzys.com/logo.png",
+      "email": "msfizzysdrinks@gmail.com",
+      "areaServed": ["Marin County", "North Bay Area", "California"],
+      "servesCuisine": "Beverages",
+      "priceRange": "$",
+      "sameAs": ["https://www.instagram.com/ms.fizzys"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="logo.png">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+          href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#home" class="nav-brand">
+            <img src="logo.png" alt="Ms. Fizzy's Dirty Sodas Logo" width="48" height="48">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">Ms. Fizzy's</span>
+                <span class="nav-brand-sub">Dirty Sodas</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="#menu">Menu</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <a href="shop.html">Shop</a>
+            <a href="event-request.html" class="nav-cta">Book Us</a>
+            <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Follow Ms. Fizzy's on Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu" id="hamburger-btn">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="#menu" onclick="toggleMobileMenu()">Menu</a>
+        <a href="#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <a href="shop.html">Shop</a>
+        <a href="event-request.html">Book Us</a>
+        <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <div class="hero-card">
+        <img src="logo.png" alt="Ms. Fizzy's Dirty Sodas Logo" width="150" height="150"
+             class="hero-logo" fetchpriority="high" loading="eager">
+        <div class="hero-brand">Ms. Fizzy's</div>
+        <div class="hero-sub">Dirty Sodas</div>
+        <p class="hero-tagline">Marin County's 1st Dirty Soda Company</p>
+        <div class="hero-btns">
+            <a href="#menu" class="btn-primary">See Our Menu</a>
+            <a href="event-request.html" class="btn-outline">Book an Event</a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="about-inner">
+        <h2 class="about-heading">Ms. Fizzy's Story</h2>
+        <div class="about-body">
+            <p>Make your party POPPIN'! Ms. Fizzy's is a mobile beverage cart &amp; catering company in Marin County and the North Bay Area. We're mixing up fun sodas, iced coffees, and more! Never heard of a DIRTY SODA? It's soda with cream and fun flavors!</p>
+            <p>Available for your next event — birthday party, wedding, corporate gathering, school fundraiser! Ms. Fizzy's is for the whole family. Dirty sodas will soon be your new favorite sweet treat!</p>
+            <div class="about-drinks">Dirty Sodas · Iced Coffees · Seasonal Beverages</div>
+        </div>
+    </div>
+</section>
+
+<!-- QUIZ STRIP -->
+<div class="quiz-strip">
+    <span class="quiz-strip-tag">Find Your Fizz</span>
+    <h3>Which Drink Are You?</h3>
+    <p>4 questions. One perfect fizz. Let's find out.</p>
+    <a href="quiz.html" class="btn-quiz">Take Our Drink Quiz 🥤</a>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="menu">
+    <div class="section-header">
+        <h2>Our Menu</h2>
+        <p>Dirty Sodas &amp; Iced Coffees</p>
+    </div>
+
+    <!-- DIRTY SODAS -->
+    <div class="menu-category-label">Dirty Sodas</div>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="dr-fizz.webp" alt="DR. Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>DR. Fizz</h3>
+                <p>Dr. Pepper with a strawberry cream top and freeze dried strawberry topping.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="shirley-fizz.webp" alt="Shirley Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Shirley Fizz</h3>
+                <p>Sprite with strawberry syrup and vanilla cream top, with sprinkles on top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="classic-fizz.webp" alt="Classic Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Classic Fizz</h3>
+                <p>Coke or Diet Coke with fresh lime and coconut cream top with lime zest topping.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="orange-fizzsicle.webp" alt="Orange Fizz-Sicle" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Orange Fizz-Sicle</h3>
+                <p>Orange Fanta and vanilla cream top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="root-beer-fizz.webp" alt="Root Beer Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Root Beer Fizz</h3>
+                <p>Root Beer with vanilla cream top and Biscoff cookie crumble.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="cherry-coke-fizz.webp" alt="Cherry Coke Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Cherry Coke Fizz</h3>
+                <p>Coke or Diet Coke with cherry syrup and vanilla cream top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="fizz-with-wings.webp" alt="Fizz With Wings" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Fizz With Wings</h3>
+                <p>Redbull with raspberry syrup and vanilla cream top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="limoncello-coconut-fizz.webp" alt="Limoncello Coconut Fizz" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Limoncello Coconut Fizz</h3>
+                <p>Sparkling water with fresh lemon and coconut cream top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="unicorn-lemonade.webp" alt="Unicorn Lemonade" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Unicorn Lemonade</h3>
+                <p>Fresh lemonade with a butterfly tea color changing effect!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ICED COFFEES -->
+    <div class="menu-category-label">Iced Coffees</div>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="caramel-iced-coffee.webp" alt="Caramel Iced Coffee" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>Caramel Iced Coffee</h3>
+                <p>STOK cold brew light roast with caramel sauce, whole milk, and caramel cream top.</p>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-card-img"><img src="chocovanilla-iced-coffee.webp" alt="ChocoVanilla Iced Coffee" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-body">
+                <h3>ChocoVanilla Iced Coffee</h3>
+                <p>STOK cold brew with chocolate sauce, Straus chocolate milk, whole milk, and vanilla cream top.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="pricing">
+        <h3>Sizes &amp; Pricing</h3>
+        <div class="pricing-row"><span>The Fizz Mini (12 oz)</span><span>$5</span></div>
+        <div class="pricing-row"><span>The Fizz (24 oz)</span><span>$7</span></div>
+        <p class="pricing-note">Can't have dairy? Substitute for oat milk or coconut milk!</p>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <div class="section-header">
+        <h2>Services</h2>
+    </div>
+    <div class="services-inner">
+        <div class="services-card">
+            <h3>Mobile Pop-Up Cart</h3>
+            <div class="services-grid">
+                <div class="services-box">
+                    <h4>Perfect For</h4>
+                    <ul>
+                        <li>Birthday Parties</li>
+                        <li>Weddings</li>
+                        <li>Fundraisers</li>
+                        <li>Corporate Events</li>
+                        <li>Any Special Occasion!</li>
+                    </ul>
+                </div>
+                <div class="services-box">
+                    <h4>Why Choose Us</h4>
+                    <ul>
+                        <li>Delicious treats for all ages</li>
+                        <li>Dairy-free options available</li>
+                        <li>Fun, playful experience</li>
+                        <li>Woman-owned local business</li>
+                        <li>We bring the party to you!</li>
+                    </ul>
+                </div>
+            </div>
+            <a href="event-request.html" class="btn-primary">Book Us For Your Event</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="contact-inner">
+        <div class="section-header">
+            <span class="section-tag">Say Hello</span>
+            <h2>Get In Touch</h2>
+        </div>
+        <p class="lead">Ready to add some fizz to your event? Reach out to us!</p>
+        <div class="contact-links">
+            <a href="#" onclick="window.location='mail'+'to:msfizzysdrinks'+'@gmail.com';return false;" class="contact-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>msfizzysdrinks@gmail.com</span>
+            </a>
+            <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="contact-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span>@ms.fizzys</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">Ms. Fizzy's Dirty Sodas</div>
+        <div class="footer-tagline">Marin County's First Dirty Soda Company</div>
+        <div class="footer-icons">
+            <a href="#" onclick="window.location='mail'+'to:msfizzysdrinks'+'@gmail.com';return false;" aria-label="Email Ms. Fizzy's">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Ms. Fizzy's Dirty Sodas. All rights reserved. &nbsp;·&nbsp; Woman-owned · Born and raised in Marin County</p>
+        </div>
+    </div>
+</footer>
+
+<script defer>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
