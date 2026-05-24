@@ -339,7 +339,7 @@
 <script src="https://web.squarecdn.com/v1/square.js"></script>
 <script>
   // ── ORDERING WINDOW ──
-function isOrderingOpen() {
+ function isOrderingOpen() {
     const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
     const day = now.getDay();
     return day === 1 || day === 2 || day === 3;
@@ -739,11 +739,23 @@ function isOrderingOpen() {
 
   async function handlePayment() {
     if (cart.length === 0) return;
-    if (fulfillment === "delivery" && !document.getElementById("delivery-address").value.trim()) {
-      const msg = document.getElementById("payment-message");
-      msg.textContent = "Please enter your Novato delivery address.";
-      msg.className = "payment-message error";
-      return;
+    if (fulfillment === "delivery") {
+      const addr = document.getElementById("delivery-address").value.trim();
+      if (!addr) {
+        const msg = document.getElementById("payment-message");
+        msg.textContent = "Please enter your Novato delivery address.";
+        msg.className = "payment-message error";
+        return;
+      }
+      // Validate Novato zip codes
+      const NOVATO_ZIPS = ["94945", "94947", "94948", "94949", "94998"];
+      const zipMatch = addr.match(/\b(\d{5})\b/);
+      if (!zipMatch || !NOVATO_ZIPS.includes(zipMatch[1])) {
+        const msg = document.getElementById("payment-message");
+        msg.textContent = "Sorry, we only deliver to Novato (zip codes: 94945, 94947, 94948, 94949, 94998). Please choose pickup or enter a Novato address.";
+        msg.className = "payment-message error";
+        return;
+      }
     }
 
     const btn = document.getElementById("pay-btn");
