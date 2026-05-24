@@ -748,7 +748,7 @@
         return;
       }
       // Validate Novato zip codes
-      const NOVATO_ZIPS = ["94945", "94947", "94948", "94949", "94998"];
+      const NOVATO_ZIPS = ["94945", "94947", "94949", "94998"];
       const zipMatch = addr.match(/\b(\d{5})\b/);
       if (!zipMatch || !NOVATO_ZIPS.includes(zipMatch[1])) {
         const msg = document.getElementById("payment-message");
