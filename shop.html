@@ -339,10 +339,8 @@
 <script src="https://web.squarecdn.com/v1/square.js"></script>
 <script>
   // ── ORDERING WINDOW ──
- function isOrderingOpen() {
-    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
-    const day = now.getDay();
-    return day === 1 || day === 2 || day === 3;
+function isOrderingOpen() {
+    return true;
   }
 
   function initShop() {
