@@ -381,8 +381,8 @@
   const SYRUP_OPTIONS = ["Vanilla", "Strawberry", "Watermelon", "Guava", "Peach", "Raspberry", "Pineapple", "Banana", "Toasted Marshmallow", "Cherry", "Coconut", "Mango"];
   const GARNISH_OPTIONS = ["Cherries", "Sprinkles", "Cookie Crumbles", "Freeze Dried Strawberry", "Freeze Dried Pineapple"];
 
-  let SQUARE_APP_ID = null;
-  let SQUARE_LOCATION_ID = null;
+  const SQUARE_APP_ID = "sq0idp-aWz8gGMSS-c5pX1Pp89BGw";
+  const SQUARE_LOCATION_ID = "L06WYB7ZW0FX2";
   const DELIVERY_FEE = 10;
   const BUNDLE_COUNT = 6;
   const BUNDLE_PRICE = 24;
@@ -761,18 +761,8 @@
     btn.setAttribute("aria-expanded", !open);
   }
 
-  // Fetch config then init
-  fetch("/.netlify/functions/get-config")
-    .then(r => r.json())
-    .then(config => {
-      SQUARE_APP_ID = config.applicationId;
-      SQUARE_LOCATION_ID = config.locationId;
-      initShop();
-    })
-    .catch(err => {
-      console.error("Failed to load config:", err);
-      initShop(); // still init shop UI even if Square fails
-    });
+
+  initShop();
 </script>
 </body>
 </html>
