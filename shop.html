@@ -340,7 +340,9 @@
 <script>
   // ── ORDERING WINDOW ──
 function isOrderingOpen() {
-    return true;
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    const day = now.getDay();
+    return day === 1 || day === 2 || day === 3;
   }
 
   function initShop() {
