@@ -340,7 +340,9 @@
 <script>
   // ── ORDERING WINDOW ──
  function isOrderingOpen() {
-    return true;
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    const day = now.getDay();
+    return day === 1 || day === 2 || day === 3;
   }
 
   function initShop() {
@@ -359,22 +361,21 @@
 
   // ── DATA ──
   const SODAS = [
-    { id: "cherry-coke-fizz", name: "Cherry Coke Fizz", desc: "24oz DIY kit · Cherry coke dirty soda", price: 10, img: "cherry-coke-fizz.webp", type: "soda" },
-    { id: "classic-fizz", name: "Classic Fizz", desc: "24oz DIY kit · Our signature dirty soda", price: 10, img: "classic-fizz.webp", type: "soda" },
-    { id: "dr-fizz", name: "Dr. Fizz", desc: "24oz DIY kit · Dr. Pepper-inspired dirty soda", price: 10, img: "dr-fizz.webp", type: "soda" },
-    { id: "orange-fizzsicle", name: "Orange Fizzsicle", desc: "24oz DIY kit · Creamy orange dreamsicle soda", price: 10, img: "orange-fizzsicle.webp", type: "soda" },
-    { id: "root-beer-fizz", name: "Root Beer Fizz", desc: "24oz DIY kit · Classic root beer dirty soda", price: 10, img: "root-beer-fizz.webp", type: "soda" },
-    { id: "shirley-fizz", name: "Shirley Fizz", desc: "24oz DIY kit · Grenadine & ginger ale fizz", price: 10, img: "shirley-fizz.webp", type: "soda" },
-    { id: "limoncello-coconut-fizz", name: "Limoncello Coconut", desc: "24oz DIY kit · Tropical citrus coconut refresher", price: 10, img: "limoncello-coconut-fizz.webp", type: "soda" },
-    { id: "unicorn-lemonade", name: "Unicorn Lemonade", desc: "24oz DIY kit · Colorful, sweet & magical", price: 10, img: "unicorn-lemonade.webp", type: "soda" },
-    { id: "fizz-with-wings", name: "Fizz with Wings", desc: "24oz DIY kit · Energizing dirty soda twist", price: 10, img: "fizz-with-wings.webp", type: "soda" },
+    { id: "cherry-coke-fizz", name: "Cherry Coke Fizz", desc: "Coke or Diet Coke with cherry syrup and vanilla cream top.", price: 10, img: "cherry-coke-fizz.webp", type: "soda" },
+    { id: "classic-fizz", name: "Classic Fizz", desc: "Coke or Diet Coke with fresh lime and coconut cream top with lime zest topping.", price: 10, img: "classic-fizz.webp", type: "soda" },
+    { id: "dr-fizz", name: "Dr. Fizz", desc: "Dr. Pepper with a strawberry cream top and freeze dried strawberry topping.", price: 10, img: "dr-fizz.webp", type: "soda" },
+    { id: "orange-fizzsicle", name: "Orange Fizzsicle", desc: "Orange Fanta and vanilla cream top.", price: 10, img: "orange-fizzsicle.webp", type: "soda" },
+    { id: "root-beer-fizz", name: "Root Beer Fizz", desc: "Root Beer with vanilla cream top and Biscoff cookie crumble.", price: 10, img: "root-beer-fizz.webp", type: "soda" },
+    { id: "shirley-fizz", name: "Shirley Fizz", desc: "Sprite with strawberry syrup and vanilla cream top, with sprinkles on top.", price: 10, img: "shirley-fizz.webp", type: "soda" },
+    { id: "limoncello-coconut-fizz", name: "Limoncello Coconut", desc: "Sparkling water with fresh lemon and coconut cream top.", price: 10, img: "limoncello-coconut-fizz.webp", type: "soda" },
+    { id: "fizz-with-wings", name: "Fizz with Wings", desc: "Redbull with raspberry syrup and vanilla cream top.", price: 10, img: "fizz-with-wings.webp", type: "soda" },
   ];
 
   const BOTTLES = [
-    { id: "caramel-iced-coffee", name: "Caramel Iced Coffee", desc: "12oz bottle · Rich iced coffee with velvety caramel", price: 5, img: "caramel-iced-coffee.webp", type: "bottle" },
-    { id: "chocovanilla-iced-coffee", name: "Choco Vanilla Coffee", desc: "12oz bottle · Chocolate and vanilla cold brew", price: 5, img: "chocovanilla-iced-coffee.webp", type: "bottle" },
-    { id: "green-juice", name: "Green Juice", desc: "12oz bottle · Fresh pressed green goodness", price: 5, img: "classic-fizz.webp", type: "bottle" },
-    { id: "strawberry-lemonade", name: "Strawberry Lemonade", desc: "12oz bottle · Sweet strawberry & tangy lemon", price: 5, img: "shirley-fizz.webp", type: "bottle" },
+    { id: "caramel-iced-coffee", name: "Caramel Iced Coffee", desc: "STOK cold brew light roast with caramel sauce, whole milk, and caramel cream top.", price: 5, img: "caramel-iced-coffee.webp", type: "bottle", dairyFreeOption: true },
+    { id: "green-juice", name: "Green Juice", desc: "Coconut water, kale, mango, pineapple, banana, and lemon.", price: 5, img: "classic-fizz.webp", type: "bottle" },
+    { id: "strawberry-lemonade", name: "Strawberry Lemonade", desc: "Fresh squeezed lemonade with fresh farmers market strawberries.", price: 5, img: "shirley-fizz.webp", type: "bottle" },
+    { id: "unicorn-lemonade", name: "Unicorn Lemonade", desc: "Fresh lemonade with a butterfly tea color changing effect!", price: 5, img: "unicorn-lemonade.webp", type: "bottle" },
   ];
 
   const SODA_OPTIONS = ["Dr Pepper", "Coke", "Diet Coke", "Orange Fanta", "Sprite"];
@@ -417,8 +418,23 @@
           <div class="product-price">$${p.price.toFixed(2)}</div>
           ${hasGarnish ? `
             <div style="margin-bottom:0.75rem;">
+              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Make it Dairy Free <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
+              <div class="chip-group" id="dairy-${p.id}" style="gap:0.35rem;">
+                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Coconut Milk')">Coconut Milk</span>
+                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Oat Milk')">Oat Milk</span>
+              </div>
+            </div>
+            <div style="margin-bottom:0.75rem;">
               <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Add Garnish <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
               <div class="chip-group" id="garnish-${p.id}" style="gap:0.35rem;"></div>
+            </div>
+          ` : p.dairyFreeOption ? `
+            <div style="margin-bottom:0.75rem;">
+              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Make it Dairy Free <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
+              <div class="chip-group" id="dairy-${p.id}" style="gap:0.35rem;">
+                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Coconut Milk')">Coconut Milk</span>
+                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Oat Milk')">Oat Milk</span>
+              </div>
             </div>
           ` : ""}
           <button class="add-to-cart-btn" id="btn-${p.id}" onclick="addProductToCart('${p.id}')">Add to Cart</button>
@@ -440,6 +456,15 @@
           container.appendChild(chip);
         });
       });
+    }
+  }
+
+  function toggleDairyChip(chip, productId, milk) {
+    const container = document.getElementById(`dairy-${productId}`);
+    const chips = container.querySelectorAll(".chip");
+    chips.forEach(c => c.classList.remove("selected"));
+    if (!chip.classList.contains("selected")) {
+      chip.classList.add("selected");
     }
   }
 
@@ -567,7 +592,20 @@
       garnishCost = Math.max(0, garnishes.length - GARNISH_FREE) * GARNISH_EXTRA_COST;
     }
 
-    const detail = garnishes.length ? `Garnishes: ${garnishes.join(", ")}` : "";
+    // Collect dairy free option if soda or dairy-free-option bottle
+    let dairyFree = "";
+    if (product.type === "soda" || product.dairyFreeOption) {
+      const dairyContainer = document.getElementById(`dairy-${id}`);
+      if (dairyContainer) {
+        const selected = dairyContainer.querySelector(".chip.selected");
+        if (selected) dairyFree = selected.textContent;
+      }
+    }
+
+    const detailParts = [];
+    if (dairyFree) detailParts.push(`Dairy Free: ${dairyFree}`);
+    if (garnishes.length) detailParts.push(`Garnishes: ${garnishes.join(", ")}`);
+    const detail = detailParts.join(" · ");
 
     addToCartItem({
       id: `${id}-${Date.now()}`,
@@ -760,7 +798,6 @@
     menu.style.display = open ? "none" : "block";
     btn.setAttribute("aria-expanded", !open);
   }
-
 
   initShop();
 </script>
