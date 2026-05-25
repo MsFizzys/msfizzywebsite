@@ -225,7 +225,7 @@
 
       <!-- DIRTY SODAS -->
       <h2 class="shop-category-title">Dirty Soda DIY Kits</h2>
-      <p class="shop-category-sub">24oz · $10 each · Includes cups, straws, syrups, soda & cream top — just add ice!</p>
+      <p class="shop-category-sub">24oz · $8 each · Includes cups, straws, syrups, soda & cream top — just add ice!</p>
       <div class="product-grid" id="soda-grid"></div>
 
       <!-- 12oz BOTTLES -->
@@ -239,10 +239,10 @@
 
       <!-- CUSTOM DRINKS -->
       <h2 class="shop-category-title">Build Your Own Drink</h2>
-      <p class="shop-category-sub">24oz · Starting at $10 · Make it exactly how you want it</p>
+      <p class="shop-category-sub">24oz · Starting at $8 · Make it exactly how you want it</p>
       <div class="custom-builder">
         <h3>Custom Drink Builder</h3>
-        <p class="builder-sub">$10 base · Extra syrups +$0.50 · Extra garnishes +$0.25</p>
+        <p class="builder-sub">$8 base · Extra syrups +$0.50 · Extra garnishes +$0.25</p>
 
         <div class="builder-section">
           <label>Choose Your Soda <span style="color:var(--coral);font-size:0.65rem;">*Required</span></label>
@@ -358,14 +358,14 @@
 
   // ── DATA ──
   const SODAS = [
-    { id: "cherry-coke-fizz", name: "Cherry Coke Fizz", desc: "Coke or Diet Coke with cherry syrup and vanilla cream top.", price: 10, img: "cherry-coke-fizz.webp", type: "soda" },
-    { id: "classic-fizz", name: "Classic Fizz", desc: "Coke or Diet Coke with fresh lime and coconut cream top with lime zest topping.", price: 10, img: "classic-fizz.webp", type: "soda" },
-    { id: "dr-fizz", name: "Dr. Fizz", desc: "Dr. Pepper with a strawberry cream top and freeze dried strawberry topping.", price: 10, img: "dr-fizz.webp", type: "soda" },
-    { id: "orange-fizzsicle", name: "Orange Fizzsicle", desc: "Orange Fanta and vanilla cream top.", price: 10, img: "orange-fizzsicle.webp", type: "soda" },
-    { id: "root-beer-fizz", name: "Root Beer Fizz", desc: "Root Beer with vanilla cream top and Biscoff cookie crumble.", price: 10, img: "root-beer-fizz.webp", type: "soda" },
-    { id: "shirley-fizz", name: "Shirley Fizz", desc: "Sprite with strawberry syrup and vanilla cream top, with sprinkles on top.", price: 10, img: "shirley-fizz.webp", type: "soda" },
-    { id: "limoncello-coconut-fizz", name: "Limoncello Coconut", desc: "Sparkling water with fresh lemon and coconut cream top.", price: 10, img: "limoncello-coconut-fizz.webp", type: "soda" },
-    { id: "fizz-with-wings", name: "Fizz with Wings", desc: "Redbull with raspberry syrup and vanilla cream top.", price: 10, img: "fizz-with-wings.webp", type: "soda" },
+    { id: "cherry-coke-fizz", name: "Cherry Coke Fizz", desc: "Coke or Diet Coke with cherry syrup and vanilla cream top.", price: 8, img: "cherry-coke-fizz.webp", type: "soda" },
+    { id: "classic-fizz", name: "Classic Fizz", desc: "Coke or Diet Coke with fresh lime and coconut cream top with lime zest topping.", price: 8, img: "classic-fizz.webp", type: "soda" },
+    { id: "dr-fizz", name: "Dr. Fizz", desc: "Dr. Pepper with a strawberry cream top and freeze dried strawberry topping.", price: 8, img: "dr-fizz.webp", type: "soda" },
+    { id: "orange-fizzsicle", name: "Orange Fizzsicle", desc: "Orange Fanta and vanilla cream top.", price: 8, img: "orange-fizzsicle.webp", type: "soda" },
+    { id: "root-beer-fizz", name: "Root Beer Fizz", desc: "Root Beer with vanilla cream top and Biscoff cookie crumble.", price: 8, img: "root-beer-fizz.webp", type: "soda" },
+    { id: "shirley-fizz", name: "Shirley Fizz", desc: "Sprite with strawberry syrup and vanilla cream top, with sprinkles on top.", price: 8, img: "shirley-fizz.webp", type: "soda" },
+    { id: "limoncello-coconut-fizz", name: "Limoncello Coconut", desc: "Sparkling water with fresh lemon and coconut cream top.", price: 8, img: "limoncello-coconut-fizz.webp", type: "soda" },
+    { id: "fizz-with-wings", name: "Fizz with Wings", desc: "Redbull with raspberry syrup and vanilla cream top.", price: 8, img: "fizz-with-wings.webp", type: "soda" },
   ];
 
   const BOTTLES = [
@@ -534,7 +534,7 @@
   }
 
   function getCustomPrice() {
-    let price = 10;
+    let price = 8;
     const extraSyrups = Math.max(0, selectedSyrups.length - SYRUP_FREE);
     price += extraSyrups * SYRUP_EXTRA_COST;
     const extraGarnishes = Math.max(0, selectedGarnishesCustom.length - GARNISH_FREE);
