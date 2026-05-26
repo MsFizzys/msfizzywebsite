@@ -42,6 +42,32 @@
           href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700;800&display=swap"></noscript>
     <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Menu bullet point ingredients */
+      .menu-card-body ul {
+        list-style: disc;
+        padding-left: 1.25rem;
+        margin: 0.4rem 0 0;
+        font-size: 0.78rem;
+        color: var(--brown-mid, #6b4c2a);
+        line-height: 1.7;
+      }
+      .menu-card-body .ingredients-label {
+        font-weight: 800;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold, #d4a843);
+        margin-top: 0.5rem;
+        display: block;
+      }
+      /* Two-row mobile menu grid */
+      @media (max-width: 700px) {
+        .menu-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
+    </style>
 </head>
 <body>
 
@@ -67,7 +93,7 @@
             <a href="#menu">Menu</a>
             <a href="#services">Services</a>
             <a href="#contact">Contact</a>
-            <a href="shop.html">Shop</a>
+            <a href="shop.html">Order DIY Kits</a>
             <a href="event-request.html" class="nav-cta">Book Us</a>
             <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Follow Ms. Fizzy's on Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,7 +114,7 @@
         <a href="#menu" onclick="toggleMobileMenu()">Menu</a>
         <a href="#services" onclick="toggleMobileMenu()">Services</a>
         <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
-        <a href="shop.html">Shop</a>
+        <a href="shop.html">Order DIY Kits</a>
         <a href="event-request.html">Book Us</a>
         <a href="https://www.instagram.com/ms.fizzys?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
     </div>
@@ -114,6 +140,7 @@
         <div class="hero-btns">
             <a href="#menu" class="btn-primary">See Our Menu</a>
             <a href="event-request.html" class="btn-outline">Book an Event</a>
+            <a href="shop.html" style="display:inline-block;background:#000;color:#fff;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 1.75rem;border-radius:999px;border:2px solid #333;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'">Order DIY Kits</a>
         </div>
     </div>
 </section>
@@ -141,7 +168,7 @@
 <!-- MENU -->
 <section id="menu" class="menu">
     <div class="section-header">
-        <h2>Our Menu</h2>
+        <h2>Catering Menu</h2>
         <p>Dirty Sodas &amp; Iced Coffees</p>
     </div>
 
@@ -152,91 +179,143 @@
             <div class="menu-card-img"><img src="dr-fizz.webp" alt="DR. Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>DR. Fizz</h3>
-                <p>Dr. Pepper with a strawberry cream top and freeze dried strawberry topping.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Dr. Pepper / Diet Dr. Pepper</li>
+                    <li>Strawberry cream top</li>
+                    <li>Freeze-dried strawberry topping</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="shirley-fizz.webp" alt="Shirley Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Shirley Fizz</h3>
-                <p>Sprite with strawberry syrup and vanilla cream top, with sprinkles on top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Sprite</li>
+                    <li>Strawberry syrup</li>
+                    <li>Vanilla cream top</li>
+                    <li>Sprinkles</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="classic-fizz.webp" alt="Classic Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Classic Fizz</h3>
-                <p>Coke or Diet Coke with fresh lime and coconut cream top with lime zest topping.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Coke / Diet Coke</li>
+                    <li>Fresh lime</li>
+                    <li>Coconut cream top</li>
+                    <li>Lime zest topping</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="orange-fizzsicle.webp" alt="Orange Fizz-Sicle" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Orange Fizz-Sicle</h3>
-                <p>Orange Fanta and vanilla cream top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Orange Fanta</li>
+                    <li>Vanilla cream top</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="root-beer-fizz.webp" alt="Root Beer Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Root Beer Fizz</h3>
-                <p>Root Beer with vanilla cream top and Biscoff cookie crumble.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Root Beer</li>
+                    <li>Vanilla cream top</li>
+                    <li>Biscoff cookie crumble</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="cherry-coke-fizz.webp" alt="Cherry Coke Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Cherry Coke Fizz</h3>
-                <p>Coke or Diet Coke with cherry syrup and vanilla cream top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Coke / Diet Coke</li>
+                    <li>Cherry syrup</li>
+                    <li>Vanilla cream top</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="fizz-with-wings.webp" alt="Fizz With Wings" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Fizz With Wings</h3>
-                <p>Redbull with raspberry syrup and vanilla cream top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Redbull</li>
+                    <li>Raspberry syrup</li>
+                    <li>Vanilla cream top</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="limoncello-coconut-fizz.webp" alt="Limoncello Coconut Fizz" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Limoncello Coconut Fizz</h3>
-                <p>Sparkling water with fresh lemon and coconut cream top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Sparkling water</li>
+                    <li>Fresh lemon</li>
+                    <li>Coconut cream top</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
             <div class="menu-card-img"><img src="unicorn-lemonade.webp" alt="Unicorn Lemonade" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Unicorn Lemonade</h3>
-                <p>Fresh lemonade with a butterfly tea color changing effect!</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Fresh lemonade</li>
+                    <li>Butterfly tea color changing effect</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- ICED COFFEES -->
-    <div class="menu-category-label">Iced Coffees</div>
+    <!-- ICED COFFEES & BOTTLES -->
+    <div class="menu-category-label">Iced Coffees &amp; Bottles</div>
     <div class="menu-grid">
         <div class="menu-card">
             <div class="menu-card-img"><img src="caramel-iced-coffee.webp" alt="Caramel Iced Coffee" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
                 <h3>Caramel Iced Coffee</h3>
-                <p>STOK cold brew light roast with caramel sauce, whole milk, and caramel cream top.</p>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>STOK cold brew light roast</li>
+                    <li>Caramel sauce</li>
+                    <li>Whole milk</li>
+                    <li>Caramel cream top</li>
+                </ul>
             </div>
         </div>
         <div class="menu-card">
-            <div class="menu-card-img"><img src="chocovanilla-iced-coffee.webp" alt="ChocoVanilla Iced Coffee" width="400" height="300" loading="lazy"></div>
+            <div class="menu-card-img"><img src="shirley-fizz.webp" alt="Strawberry Lemonade" width="400" height="300" loading="lazy"></div>
             <div class="menu-card-body">
-                <h3>ChocoVanilla Iced Coffee</h3>
-                <p>STOK cold brew with chocolate sauce, Straus chocolate milk, whole milk, and vanilla cream top.</p>
+                <h3>Strawberry Lemonade</h3>
+                <span class="ingredients-label">Ingredients</span>
+                <ul>
+                    <li>Fresh squeezed lemonade</li>
+                    <li>Fresh farmers market strawberries</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- PRICING -->
+    <!-- DAIRY FREE NOTE -->
     <div class="pricing">
-        <h3>Sizes &amp; Pricing</h3>
-        <div class="pricing-row"><span>The Fizz Mini (12 oz)</span><span>$5</span></div>
-        <div class="pricing-row"><span>The Fizz (24 oz)</span><span>$7</span></div>
         <p class="pricing-note">Can't have dairy? Substitute for oat milk or coconut milk!</p>
     </div>
 </section>
@@ -272,6 +351,33 @@
                 </div>
             </div>
             <a href="event-request.html" class="btn-primary">Book Us For Your Event</a>
+        </div>
+
+        <div class="services-card" style="margin-top:2rem;">
+            <h3>DIY Dirty Soda Kits</h3>
+            <div class="services-grid">
+                <div class="services-box">
+                    <h4>How It Works</h4>
+                    <ul>
+                        <li>Pre-order Monday – Wednesday</li>
+                        <li>Pickup or delivery on Friday</li>
+                        <li>Delivery available in Novato</li>
+                        <li>Everything included — just add ice!</li>
+                        <li>Cups, straws, syrups, soda &amp; cream top</li>
+                    </ul>
+                </div>
+                <div class="services-box">
+                    <h4>Why You'll Love It</h4>
+                    <ul>
+                        <li>Make your favorite fizz at home</li>
+                        <li>Dairy-free options available</li>
+                        <li>Custom drink builder available</li>
+                        <li>Mix &amp; match bottle bundles</li>
+                        <li>Perfect for parties &amp; gatherings!</li>
+                    </ul>
+                </div>
+            </div>
+            <a href="shop.html" class="btn-primary">Order DIY Soda Kits</a>
         </div>
     </div>
 </section>
