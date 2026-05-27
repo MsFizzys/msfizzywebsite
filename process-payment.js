@@ -24,23 +24,15 @@ function httpsRequest(options, payload) {
       });
     });
 
-    req.setTimeout(10000, () => {
-      req.destroy(new Error("Request timeout"));
-    });
-
     if (payload) req.write(payload);
+
     req.end();
   });
 }
 
-function escapeHtml(str = "") {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+/* ─────────────────────────────
+   ADMIN ORDER EMAIL
+───────────────────────────── */
 
 async function sendOrderEmail(orderDetails) {
   const {
@@ -54,58 +46,57 @@ async function sendOrderEmail(orderDetails) {
     bundleSaving,
   } = orderDetails;
 
-  const safeCustomerName = escapeHtml(customerName || "Customer");
-  const safeCustomerEmail = escapeHtml(customerEmail || "Not provided");
-  const safeDeliveryAddress = escapeHtml(deliveryAddress || "");
-  const safeDeliveryInstructions = escapeHtml(deliveryInstructions || "");
+  const itemRows = items.map((item) => {
+    const lines = [
+      `<strong>${item.name}</strong> x${item.qty} — $${(
+        item.price * item.qty
+      ).toFixed(2)}`,
+    ];
 
-  const itemRows = items
-    .map((item) => {
-      const lines = [
-        `<strong>${escapeHtml(item.name)}</strong> x${item.qty} — $${(
-          item.price * item.qty
-        ).toFixed(2)}`,
-      ];
+    if (item.detail) {
+      lines.push(
+        `<span style="color:#888;font-size:13px;">${item.detail}</span>`
+      );
+    }
 
-      if (item.detail) {
-        lines.push(
-          `<span style="color:#888;font-size:13px;">${escapeHtml(
-            item.detail
-          )}</span>`
-        );
-      }
-
-      return `<tr><td style="padding:8px 0;border-bottom:1px solid #f0e8dc;">${lines.join(
-        "<br>"
-      )}</td></tr>`;
-    })
-    .join("");
+    return `
+      <tr>
+        <td style="padding:8px 0;border-bottom:1px solid #f0e8dc;">
+          ${lines.join("<br>")}
+        </td>
+      </tr>
+    `;
+  }).join("");
 
   const fulfillmentSection =
     fulfillment === "delivery"
       ? `
         <p><strong>Fulfillment:</strong> Delivery</p>
-        <p><strong>Address:</strong> ${safeDeliveryAddress}</p>
+        <p><strong>Address:</strong> ${deliveryAddress}</p>
         ${
-          safeDeliveryInstructions
-            ? `<p><strong>Instructions:</strong> ${safeDeliveryInstructions}</p>`
+          deliveryInstructions
+            ? `<p><strong>Instructions:</strong> ${deliveryInstructions}</p>`
             : ""
         }
       `
       : `<p><strong>Fulfillment:</strong> Pickup</p>`;
 
-  const businessHtml = `
+  const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border:2px solid #d4a843;border-radius:16px;overflow:hidden;">
       <div style="background:#c0392b;padding:24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:24px;">🥤 New Ms. Fizzy's Order!</h1>
+        <h1 style="color:#fff;margin:0;font-size:24px;">
+          🥤 New Ms. Fizzy's Order!
+        </h1>
       </div>
 
       <div style="padding:24px;">
         <h2 style="color:#c0392b;margin-top:0;">Customer Info</h2>
-        <p><strong>Name:</strong> ${safeCustomerName}</p>
-        <p><strong>Email:</strong> ${safeCustomerEmail}</p>
+
+        <p><strong>Name:</strong> ${customerName || "Not provided"}</p>
+        <p><strong>Email:</strong> ${customerEmail || "Not provided"}</p>
 
         <h2 style="color:#c0392b;">Fulfillment</h2>
+
         ${fulfillmentSection}
 
         <h2 style="color:#c0392b;">Order Details</h2>
@@ -117,9 +108,9 @@ async function sendOrderEmail(orderDetails) {
         <div style="margin-top:16px;padding:12px;background:#fdf6ec;border-radius:8px;">
           ${
             bundleSaving > 0
-              ? `<p style="margin:4px 0;color:#888;">Bundle Discount: -$${bundleSaving.toFixed(
-                  2
-                )}</p>`
+              ? `<p style="margin:4px 0;color:#888;">
+                  Bundle Discount: -$${bundleSaving.toFixed(2)}
+                </p>`
               : ""
           }
 
@@ -129,7 +120,8 @@ async function sendOrderEmail(orderDetails) {
         </div>
 
         <p style="margin-top:24px;color:#888;font-size:12px;">
-          This order was placed on ${new Date().toLocaleString("en-US", {
+          This order was placed on
+          ${new Date().toLocaleString("en-US", {
             timeZone: "America/Los_Angeles",
           })} PT
         </p>
@@ -137,106 +129,174 @@ async function sendOrderEmail(orderDetails) {
     </div>
   `;
 
-  const resendHeaders = {
-    Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-    "Content-Type": "application/json",
-  };
-
-  // Send business notification email
-  const businessPayload = JSON.stringify({
+  const emailPayload = JSON.stringify({
     from: "Ms. Fizzy's Orders <orders@msfizzys.com>",
     to: ["msfizzysdrinks@gmail.com"],
-    subject: `New Order from ${safeCustomerName} — $${total.toFixed(2)}`,
-    html: businessHtml,
+    subject: `New Order from ${
+      customerName || "a customer"
+    } — $${total.toFixed(2)}`,
+    html,
   });
 
-  const businessResult = await httpsRequest(
+  const result = await httpsRequest(
     {
       hostname: "api.resend.com",
       path: "/emails",
       method: "POST",
       headers: {
-        ...resendHeaders,
-        "Content-Length": Buffer.byteLength(businessPayload),
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(emailPayload),
       },
     },
-    businessPayload
+    emailPayload
   );
 
-  // Send customer confirmation email
-  if (customerEmail) {
-    const customerHtml = `
-      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border:2px solid #d4a843;border-radius:16px;overflow:hidden;">
-        <div style="background:#c0392b;padding:24px;text-align:center;">
-          <h1 style="color:#fff;margin:0;font-size:24px;">🥤 Thanks for your order!</h1>
-        </div>
+  console.log("Admin email result:", result.body);
 
-        <div style="padding:24px;">
-          <p>Hi ${safeCustomerName},</p>
+  return result;
+}
 
-          <p>
-            We received your order from
-            <strong>Ms. Fizzy's Dirty Sodas</strong>.
-          </p>
+/* ─────────────────────────────
+   CUSTOMER CONFIRMATION EMAIL
+───────────────────────────── */
 
-          <h2 style="color:#c0392b;">Order Summary</h2>
+async function sendCustomerConfirmationEmail(orderDetails) {
+  const {
+    customerName,
+    customerEmail,
+    items,
+    fulfillment,
+    deliveryAddress,
+    deliveryInstructions,
+    total,
+    bundleSaving,
+  } = orderDetails;
 
-          <table style="width:100%;border-collapse:collapse;">
-            ${itemRows}
-          </table>
-
-          <div style="margin-top:16px;padding:12px;background:#fdf6ec;border-radius:8px;">
-            ${
-              bundleSaving > 0
-                ? `<p style="margin:4px 0;color:#888;">Bundle Discount: -$${bundleSaving.toFixed(
-                    2
-                  )}</p>`
-                : ""
-            }
-
-            <p style="margin:4px 0;font-size:18px;font-weight:bold;color:#c0392b;">
-              Total Paid: $${total.toFixed(2)}
-            </p>
-          </div>
-
-          <div style="margin-top:20px;">
-            ${fulfillmentSection}
-          </div>
-
-          <p style="margin-top:24px;">
-            Your order will be fulfilled Friday.
-          </p>
-
-          <p style="color:#888;font-size:12px;">
-            Questions? Reply to this email or message us on Instagram.
-          </p>
-        </div>
-      </div>
-    `;
-
-    const customerPayload = JSON.stringify({
-      from: "Ms. Fizzy's <orders@msfizzys.com>",
-      to: [customerEmail],
-      subject: "Your Ms. Fizzy's Order Confirmation 🥤",
-      html: customerHtml,
-    });
-
-    await httpsRequest(
-      {
-        hostname: "api.resend.com",
-        path: "/emails",
-        method: "POST",
-        headers: {
-          ...resendHeaders,
-          "Content-Length": Buffer.byteLength(customerPayload),
-        },
-      },
-      customerPayload
-    );
+  if (!customerEmail) {
+    console.log("No customer email provided");
+    return;
   }
 
-  return businessResult;
+  const itemRows = items.map((item) => {
+    const lines = [
+      `<strong>${item.name}</strong> x${item.qty} — $${(
+        item.price * item.qty
+      ).toFixed(2)}`,
+    ];
+
+    if (item.detail) {
+      lines.push(
+        `<span style="color:#888;font-size:13px;">${item.detail}</span>`
+      );
+    }
+
+    return `
+      <tr>
+        <td style="padding:8px 0;border-bottom:1px solid #f0e8dc;">
+          ${lines.join("<br>")}
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  const fulfillmentSection =
+    fulfillment === "delivery"
+      ? `
+        <p><strong>Fulfillment:</strong> Delivery</p>
+        <p><strong>Address:</strong> ${deliveryAddress}</p>
+        ${
+          deliveryInstructions
+            ? `<p><strong>Instructions:</strong> ${deliveryInstructions}</p>`
+            : ""
+        }
+      `
+      : `<p><strong>Fulfillment:</strong> Pickup</p>`;
+
+  const html = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border:2px solid #d4a843;border-radius:16px;overflow:hidden;">
+      <div style="background:#c0392b;padding:24px;text-align:center;">
+        <h1 style="color:#fff;margin:0;font-size:24px;">
+          🥤 Your Ms. Fizzy's Order is Confirmed!
+        </h1>
+      </div>
+
+      <div style="padding:24px;">
+        <p>Hi ${customerName || "there"},</p>
+
+        <p>
+          Thanks for your order! We've received it and will prepare it for Friday fulfillment.
+        </p>
+
+        <h2 style="color:#c0392b;">Order Details</h2>
+
+        <table style="width:100%;border-collapse:collapse;">
+          ${itemRows}
+        </table>
+
+        <div style="margin-top:16px;">
+          ${fulfillmentSection}
+        </div>
+
+        <div style="margin-top:16px;padding:12px;background:#fdf6ec;border-radius:8px;">
+          ${
+            bundleSaving > 0
+              ? `<p style="margin:4px 0;color:#888;">
+                  Bundle Discount: -$${bundleSaving.toFixed(2)}
+                </p>`
+              : ""
+          }
+
+          <p style="margin:4px 0;font-size:18px;font-weight:bold;color:#c0392b;">
+            Total Charged: $${total.toFixed(2)}
+          </p>
+        </div>
+
+        <p style="margin-top:24px;">
+          Questions? Reply to this email or contact us on Instagram.
+        </p>
+
+        <p style="color:#888;font-size:12px;">
+          Order placed on
+          ${new Date().toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles",
+          })} PT
+        </p>
+      </div>
+    </div>
+  `;
+
+  const emailPayload = JSON.stringify({
+    from: "Ms. Fizzy's <orders@msfizzys.com>",
+    to: [customerEmail],
+    subject: "Your Ms. Fizzy's Order Confirmation 🥤",
+    html,
+  });
+
+  console.log("Sending customer email to:", customerEmail);
+
+  const result = await httpsRequest(
+    {
+      hostname: "api.resend.com",
+      path: "/emails",
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(emailPayload),
+      },
+    },
+    emailPayload
+  );
+
+  console.log("Customer email result:", result.body);
+
+  return result;
 }
+
+/* ─────────────────────────────
+   MAIN HANDLER
+───────────────────────────── */
 
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
@@ -253,7 +313,9 @@ exports.handler = async function (event) {
   } catch {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: "Invalid request body" }),
+      body: JSON.stringify({
+        error: "Invalid request body",
+      }),
     };
   }
 
@@ -269,38 +331,32 @@ exports.handler = async function (event) {
     bundleSaving,
   } = body;
 
-  if (
-    !sourceId ||
-    typeof amount !== "number" ||
-    !Array.isArray(items) ||
-    items.length === 0
-  ) {
+  if (!sourceId || !amount || !items) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: "Missing or invalid required fields" }),
+      body: JSON.stringify({
+        error: "Missing required fields",
+      }),
     };
   }
 
-  console.log("Incoming order", {
-    customerName,
-    customerEmail,
-    amount,
-    itemCount: items.length,
-  });
-
   const payload = JSON.stringify({
     source_id: sourceId,
+
     idempotency_key: `${Date.now()}-${Math.random()
       .toString(36)
-      .slice(2, 11)}`,
+      .substr(2, 9)}`,
+
     amount_money: {
       amount: Math.round(amount),
       currency: "USD",
     },
+
     buyer_email_address: customerEmail || undefined,
-    note: `Ms. Fizzy's order from ${customerName || "customer"}: ${items
-      .map((i) => `${i.name} x${i.qty}`)
-      .join(", ")}`,
+
+    note: `Ms. Fizzy's order from ${
+      customerName || "customer"
+    }: ${items.map((i) => `${i.name} x${i.qty}`).join(", ")}`,
   });
 
   const squareResult = await httpsRequest(
@@ -320,13 +376,12 @@ exports.handler = async function (event) {
 
   const parsed = JSON.parse(squareResult.body);
 
-  console.log("Square response status", squareResult.statusCode);
+  console.log("Square payment result:", parsed);
 
-  if (
-    squareResult.statusCode >= 200 &&
-    squareResult.statusCode < 300 &&
-    parsed.payment
-  ) {
+  if (squareResult.statusCode === 200 && parsed.payment) {
+
+    /* ADMIN EMAIL */
+
     try {
       await sendOrderEmail({
         customerName,
@@ -339,7 +394,24 @@ exports.handler = async function (event) {
         bundleSaving: bundleSaving || 0,
       });
     } catch (emailErr) {
-      console.error("Email failed:", emailErr);
+      console.error("Admin email failed:", emailErr);
+    }
+
+    /* CUSTOMER EMAIL */
+
+    try {
+      await sendCustomerConfirmationEmail({
+        customerName,
+        customerEmail,
+        items,
+        fulfillment,
+        deliveryAddress,
+        deliveryInstructions,
+        total: amount / 100,
+        bundleSaving: bundleSaving || 0,
+      });
+    } catch (emailErr) {
+      console.error("Customer email failed:", emailErr);
     }
 
     return {
@@ -349,14 +421,12 @@ exports.handler = async function (event) {
         paymentId: parsed.payment.id,
       }),
     };
-  } else {
-    console.error("Square payment failed:", parsed);
-
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        error: parsed.errors?.[0]?.detail || "Payment failed",
-      }),
-    };
   }
+
+  return {
+    statusCode: 400,
+    body: JSON.stringify({
+      error: parsed.errors?.[0]?.detail || "Payment failed",
+    }),
+  };
 };
