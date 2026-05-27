@@ -63,18 +63,80 @@ async function sendOrderEmail(orderDetails) {
     html,
   });
 
-  const result = await httpsRequest({
+  const resendHeaders = {
+  "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+  "Content-Type": "application/json",
+};
+
+// Send business notification
+const businessResult = await httpsRequest({
+  hostname: "api.resend.com",
+  path: "/emails",
+  method: "POST",
+  headers: {
+    ...resendHeaders,
+    "Content-Length": Buffer.byteLength(emailPayload),
+  },
+}, emailPayload);
+
+// Send customer confirmation email
+if (customerEmail) {
+  const customerHtml = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border:2px solid #d4a843;border-radius:16px;overflow:hidden;">
+      <div style="background:#c0392b;padding:24px;text-align:center;">
+        <h1 style="color:#fff;margin:0;font-size:24px;">🥤 Thanks for your order!</h1>
+      </div>
+
+      <div style="padding:24px;">
+        <p>Hi ${customerName || "there"},</p>
+
+        <p>We received your order from <strong>Ms. Fizzy's Dirty Sodas</strong>.</p>
+
+        <h2 style="color:#c0392b;">Order Summary</h2>
+
+        <table style="width:100%;border-collapse:collapse;">
+          ${itemRows}
+        </table>
+
+        <div style="margin-top:16px;padding:12px;background:#fdf6ec;border-radius:8px;">
+          ${bundleSaving > 0 ? `<p style="margin:4px 0;color:#888;">Bundle Discount: -$${bundleSaving.toFixed(2)}</p>` : ""}
+          <p style="margin:4px 0;font-size:18px;font-weight:bold;color:#c0392b;">Total Paid: $${total.toFixed(2)}</p>
+        </div>
+
+        <div style="margin-top:20px;">
+          ${fulfillmentSection}
+        </div>
+
+        <p style="margin-top:24px;">
+          Your order will be fulfilled Friday.
+        </p>
+
+        <p style="color:#888;font-size:12px;">
+          Questions? Reply to this email or message us on Instagram.
+        </p>
+      </div>
+    </div>
+  `;
+
+  const customerPayload = JSON.stringify({
+    from: "Ms. Fizzy's <orders@msfizzys.com>",
+    to: [customerEmail],
+    subject: "Your Ms. Fizzy's Order Confirmation 🥤",
+    html: customerHtml,
+  });
+
+  await httpsRequest({
     hostname: "api.resend.com",
     path: "/emails",
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-      "Content-Length": Buffer.byteLength(emailPayload),
+      ...resendHeaders,
+      "Content-Length": Buffer.byteLength(customerPayload),
     },
-  }, emailPayload);
+  }, customerPayload);
+}
 
-  return result;
+return businessResult;
 }
 
 exports.handler = async function (event) {
