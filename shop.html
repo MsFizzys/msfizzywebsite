@@ -126,6 +126,7 @@
     .form-row label { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown-mid); margin-bottom: 0.35rem; }
     .form-row input, .form-row textarea { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--brown-dark); background: #fff; transition: border-color 0.2s; box-sizing: border-box; }
     .form-row input:focus, .form-row textarea:focus { outline: none; border-color: var(--gold); }
+    .form-row input.input-error { border-color: #c0392b; }
     .form-row textarea { resize: vertical; min-height: 80px; }
 
     .novato-note { background: var(--cream-dark); border: 1.5px solid var(--gold); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.75rem; color: var(--brown-mid); margin-bottom: 1rem; line-height: 1.5; }
@@ -297,7 +298,7 @@
       </div>
 
       <div class="pickup-note" id="pickup-note">
-        📍 <strong>Pickup Address:</strong> 35 Santa Maria Drive, Novato, CA 94947 · Pick up is on Fridays 9: 00am to 7: 00pm. email us if need to pick up outside these hours.
+        📍 <strong>Pickup Address:</strong> 35 Santa Maria Drive, Novato, CA 94947 · Pick up is on Fridays 9:00am to 7:00pm. Email us if you need to pick up outside these hours.
       </div>
 
       <div class="delivery-fields" id="delivery-fields">
@@ -318,8 +319,8 @@
         <input type="text" id="customer-name" placeholder="Your name" autocomplete="name">
       </div>
       <div class="form-row">
-        <label for="customer-email">Email</label>
-        <input type="email" id="customer-email" placeholder="you@email.com" autocomplete="email">
+        <label for="customer-email">Email <span style="color:var(--coral);font-size:0.65rem;">*Required for order confirmation</span></label>
+        <input type="email" id="customer-email" placeholder="you@email.com" autocomplete="email" required>
       </div>
 
       <h3 style="margin-top:1.25rem;">Payment</h3>
@@ -340,10 +341,11 @@
 <script>
   // ── ORDERING WINDOW ──
   function isOrderingOpen() {
-      const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
-      const day = now.getDay();
-      return day === 1 || day === 2 || day === 3;
-    }
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    const day = now.getDay();
+    return day === 1 || day === 2 || day === 3;
+  }
+
   function initShop() {
     if (isOrderingOpen()) {
       document.getElementById("shop-open-content").style.display = "block";
@@ -392,7 +394,7 @@
   const GARNISH_FREE = 1;
   const GARNISH_EXTRA_COST = 0.25;
 
-  let cart = []; // array of {id, name, img, price, qty, detail, type}
+  let cart = [];
   let card;
   let fulfillment = "pickup";
 
@@ -502,7 +504,6 @@
         chip.classList.add("selected");
         if (selectedSyrups.length > SYRUP_FREE) chip.classList.add("extra-cost");
       }
-      // Re-mark extra cost chips
       const syrupChips = [...document.querySelectorAll("#syrup-chips .chip.selected")];
       syrupChips.forEach((c, i) => {
         if (i >= SYRUP_FREE) c.classList.add("extra-cost");
@@ -567,7 +568,6 @@
       qty: 1,
     });
 
-    // Reset builder
     selectedSoda = null; selectedSyrups = []; selectedCream = null; selectedGarnishesCustom = [];
     document.querySelectorAll("#soda-chips .chip, #syrup-chips .chip, #cream-chips .chip, #garnish-chips-custom .chip").forEach(c => c.classList.remove("selected", "extra-cost"));
     updateCustomPrice();
@@ -578,7 +578,6 @@
     const product = [...SODAS, ...BOTTLES].find(p => p.id === id);
     if (!product) return;
 
-    // Collect garnishes if soda
     let garnishes = [];
     if (product.type === "soda") {
       const container = document.getElementById(`garnish-${id}`);
@@ -592,7 +591,6 @@
       garnishCost = Math.max(0, garnishes.length - GARNISH_FREE) * GARNISH_EXTRA_COST;
     }
 
-    // Collect dairy free option if soda or dairy-free-option bottle
     let dairyFree = "";
     if (product.type === "soda" || product.dairyFreeOption) {
       const dairyContainer = document.getElementById(`dairy-${id}`);
@@ -739,27 +737,49 @@
 
   async function handlePayment() {
     if (cart.length === 0) return;
+
+    const btn = document.getElementById("pay-btn");
+    const msg = document.getElementById("payment-message");
+
+    // ── VALIDATION ──
+
+    // Delivery address check
     if (fulfillment === "delivery") {
       const addr = document.getElementById("delivery-address").value.trim();
       if (!addr) {
-        const msg = document.getElementById("payment-message");
         msg.textContent = "Please enter your Novato delivery address.";
         msg.className = "payment-message error";
         return;
       }
-      // Validate Novato zip codes
       const NOVATO_ZIPS = ["94945", "94947", "94949", "94998"];
       const zipMatch = addr.match(/\b(\d{5})\b/);
       if (!zipMatch || !NOVATO_ZIPS.includes(zipMatch[1])) {
-        const msg = document.getElementById("payment-message");
         msg.textContent = "Sorry, we only deliver to Novato (zip codes: 94945, 94947, 94948, 94949, 94998). Please choose pickup or enter a Novato address.";
         msg.className = "payment-message error";
         return;
       }
     }
 
-    const btn = document.getElementById("pay-btn");
-    const msg = document.getElementById("payment-message");
+    // Email check — required for order confirmation
+    const emailInput = document.getElementById("customer-email");
+    const email = emailInput.value.trim();
+    if (!email) {
+      msg.textContent = "Please enter your email address so we can send your order confirmation.";
+      msg.className = "payment-message error";
+      emailInput.classList.add("input-error");
+      emailInput.focus();
+      return;
+    }
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.textContent = "Please enter a valid email address.";
+      msg.className = "payment-message error";
+      emailInput.classList.add("input-error");
+      emailInput.focus();
+      return;
+    }
+    emailInput.classList.remove("input-error");
+
     btn.disabled = true; btn.textContent = "Processing...";
     msg.className = "payment-message"; msg.style.display = "none";
 
@@ -779,14 +799,14 @@
           fulfillment,
           deliveryAddress: fulfillment === "delivery" ? document.getElementById("delivery-address").value.trim() : null,
           deliveryInstructions: fulfillment === "delivery" ? document.getElementById("delivery-instructions").value.trim() : null,
-          customerName: document.getElementById("customer-name").value,
-          customerEmail: document.getElementById("customer-email").value,
+          customerName: document.getElementById("customer-name").value.trim(),
+          customerEmail: email,
         }),
       });
 
       const data = await response.json();
       if (data.success) {
-        msg.textContent = `🎉 Order placed! We'll contact you with your ${fulfillment} details. See you Friday!`;
+        msg.textContent = `🎉 Order placed! Check your email for your confirmation. See you Friday!`;
         msg.className = "payment-message success";
         cart = [];
         updateCartUI();
@@ -810,6 +830,13 @@
     menu.style.display = open ? "none" : "block";
     btn.setAttribute("aria-expanded", !open);
   }
+
+  // Clear input-error styling on focus
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("customer-email").addEventListener("input", function () {
+      this.classList.remove("input-error");
+    });
+  });
 
   initShop();
 </script>
