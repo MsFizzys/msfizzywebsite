@@ -39,7 +39,6 @@
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.75rem; margin-bottom: 3rem; }
     .product-card { background: #fff; border: 2px solid var(--gold); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(44,26,14,0.08); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
     .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(44,26,14,0.14); }
-    .product-card.sold-out { opacity: 0.7; }
     .product-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-bottom: 2px solid var(--gold); }
     .product-info { padding: 1.1rem 1.1rem 1rem; flex: 1; display: flex; flex-direction: column; }
     .product-name { font-family: 'Pacifico', cursive; font-size: 1rem; color: var(--brown-dark); margin-bottom: 0.2rem; }
@@ -48,12 +47,6 @@
     .add-to-cart-btn { width: 100%; background: var(--coral); color: var(--cream); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1rem; border-radius: 999px; border: 2px solid var(--coral-light); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; }
     .add-to-cart-btn:hover { background: var(--coral-light); color: var(--brown-dark); }
     .add-to-cart-btn.added { background: var(--gold); border-color: var(--gold); color: var(--brown-dark); }
-    .sold-out-btn { width: 100%; background: #999; color: #fff; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1rem; border-radius: 999px; border: 2px solid #bbb; font-family: 'Montserrat', sans-serif; cursor: not-allowed; }
-
-    /* ── BUNDLE BANNER ── */
-    .bundle-banner { background: var(--coral); color: var(--cream); border-radius: 14px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; text-align: center; border: 2px solid var(--coral-light); }
-    .bundle-banner strong { font-size: 1rem; display: block; margin-bottom: 0.2rem; }
-    .bundle-banner span { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
 
     /* ── CUSTOM DRINK BUILDER ── */
     .custom-builder { background: #fff; border: 2px solid var(--gold); border-radius: 22px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(44,26,14,0.08); }
@@ -70,9 +63,6 @@
     .chip.selected { background: var(--gold); border-color: var(--gold); color: var(--brown-dark); }
     .chip.extra-cost { border-color: var(--coral); }
     .chip.extra-cost.selected { background: var(--coral); border-color: var(--coral); color: var(--cream); }
-
-    .builder-select { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--brown-dark); background: #fff; transition: border-color 0.2s; }
-    .builder-select:focus { outline: none; border-color: var(--gold); }
 
     .custom-price-display { font-size: 0.85rem; font-weight: 800; color: var(--coral); margin-top: 1rem; margin-bottom: 1rem; }
     .add-custom-btn { background: var(--coral); color: var(--cream); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem 2rem; border-radius: 999px; border: 2px solid var(--coral-light); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: all 0.2s; }
@@ -113,8 +103,6 @@
     .total-row.grand span:last-child { color: var(--coral); }
     .delivery-fee-row { display: none; }
     .delivery-fee-row.visible { display: flex; }
-    .bundle-saving-row { display: none; color: #217a21; }
-    .bundle-saving-row.visible { display: flex; }
 
     .fulfillment-toggle { display: flex; gap: 0; margin-bottom: 1.25rem; border: 2px solid var(--gold); border-radius: 12px; overflow: hidden; }
     .fulfillment-btn { flex: 1; padding: 0.7rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; background: transparent; color: var(--brown-mid); transition: all 0.2s; }
@@ -223,22 +211,13 @@
 
     <div id="shop-open-content" style="display:none;">
       <div class="order-window-notice">
-        🟢 Orders are open! Pre-order Monday-Wednesday<span>Friday fulfillment(pick up or Novato delivery)</span> · Window closes <span>Wednesday at midnight</span>
+        🟢 Orders are open! Pre-order Monday–Wednesday · <span>Friday fulfillment (pickup or Novato delivery)</span> · Window closes <span>Wednesday at midnight</span>
       </div>
 
       <!-- DIRTY SODAS -->
       <h2 class="shop-category-title">Dirty Soda DIY Kits</h2>
       <p class="shop-category-sub">24oz · $8 each · Includes cups, straws, syrups, soda & cream top — just add ice!</p>
       <div class="product-grid" id="soda-grid"></div>
-
-      <!-- 12oz BOTTLES -->
-      <h2 class="shop-category-title">12oz Bottles</h2>
-      <p class="shop-category-sub">$5 each · Mix & match any 6 for $24</p>
-      <div class="bundle-banner">
-        <strong>🎉 Mix & Match Bundle Deal</strong>
-        <span>Any 6 bottles for $24 — automatically applied at checkout</span>
-      </div>
-      <div class="product-grid" id="bottle-grid"></div>
 
       <!-- CUSTOM DRINKS -->
       <h2 class="shop-category-title">Build Your Own Drink</h2>
@@ -287,7 +266,6 @@
 
     <div class="cart-totals">
       <div class="total-row"><span>Subtotal</span><span id="subtotal-display">$0.00</span></div>
-      <div class="total-row bundle-saving-row" id="bundle-saving-row"><span>🎉 Bundle Discount</span><span id="bundle-saving-amount">-$0.00</span></div>
       <div class="total-row delivery-fee-row" id="delivery-fee-row"><span>Delivery Fee</span><span>$10.00</span></div>
       <div class="total-row grand"><span>Total</span><span id="cart-total-display">$0.00</span></div>
     </div>
@@ -374,14 +352,6 @@
     { id: "fizz-with-wings", name: "Fizz with Wings", desc: "Redbull with raspberry syrup and vanilla cream top.", price: 8, img: "fizz-with-wings.webp", type: "soda" },
   ];
 
-  const BOTTLES = [
-    { id: "caramel-iced-coffee", name: "Caramel Iced Coffee", desc: "STOK cold brew light roast with caramel sauce, whole milk, and caramel cream top.", price: 5, img: "caramel-iced-coffee-12oz.webp", type: "bottle", dairyFreeOption: true },
-    { id: "green-juice", name: "Green Juice", desc: "Coconut water, kale, mango, pineapple, banana, and lemon.", price: 5, img: "green-juice.webp", type: "bottle", soldOut: true },
-    { id: "strawberry-lemonade", name: "Strawberry Lemonade", desc: "Fresh squeezed lemonade with fresh farmers market strawberries.", price: 5, img: "strawberry-lemonade.webp", type: "bottle" },
-    { id: "unicorn-lemonade", name: "Unicorn Lemonade", desc: "Fresh lemonade with a butterfly tea color changing effect!", price: 5, img: "unicorn-lemonade.webp", type: "bottle" },
-    { id: "banana-caramel-iced-coffee", name: "Banana Caramel Iced Coffee", desc: "STOK cold brew with banana syrup, caramel syrup, and organic whole milk.", price: 5, img: "banana-caramel-iced-coffee.webp", type: "bottle", dairyFreeOption: true },
-  ];
-
   const SODA_OPTIONS = ["Dr Pepper", "Diet Dr Pepper", "Coke", "Diet Coke", "A&W Root Beer", "Barqs zero sugar Root beer", "Orange Fanta", "Sprite", "Lacroix sparkling water"];
   const SYRUP_OPTIONS = ["Vanilla", "Strawberry", "Watermelon", "Guava", "Peach", "Raspberry", "Pineapple", "Banana", "Toasted Marshmallow", "Cherry", "Coconut", "Mango"];
   const GARNISH_OPTIONS = ["Cherries", "Sprinkles", "Cookie Crumbles", "Freeze Dried Strawberry", "Freeze Dried Pineapple"];
@@ -389,8 +359,6 @@
   const SQUARE_APP_ID = "sq0idp-aWz8gGMSS-c5pX1Pp89BGw";
   const SQUARE_LOCATION_ID = "L06WYB7ZW0FX2";
   const DELIVERY_FEE = 10;
-  const BUNDLE_COUNT = 6;
-  const BUNDLE_PRICE = 24;
   const SYRUP_FREE = 2;
   const SYRUP_EXTRA_COST = 0.50;
   const GARNISH_FREE = 1;
@@ -407,63 +375,46 @@
 
   // ── RENDER PRODUCTS ──
   function renderAllProducts() {
-    renderGrid("soda-grid", SODAS, true);
-    renderGrid("bottle-grid", BOTTLES, false);
+    renderGrid("soda-grid", SODAS);
   }
 
-  function renderGrid(gridId, products, hasGarnish) {
+  function renderGrid(gridId, products) {
     document.getElementById(gridId).innerHTML = products.map(p => `
-      <div class="product-card${p.soldOut ? ' sold-out' : ''}">
+      <div class="product-card">
         <img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">
         <div class="product-info">
           <div class="product-name">${p.name}</div>
           <div class="product-desc">${p.desc}</div>
-          <div class="product-price">${p.soldOut ? '<span style="color:#999;">Sold Out</span>' : '$' + p.price.toFixed(2)}</div>
-          ${!p.soldOut && hasGarnish ? `
-            <div style="margin-bottom:0.75rem;">
-              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Make it Dairy Free <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
-              <div class="chip-group" id="dairy-${p.id}" style="gap:0.35rem;">
-                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Coconut Milk')">Coconut Milk</span>
-                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Oat Milk')">Oat Milk</span>
-              </div>
+          <div class="product-price">$${p.price.toFixed(2)}</div>
+          <div style="margin-bottom:0.75rem;">
+            <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Make it Dairy Free <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
+            <div class="chip-group" id="dairy-${p.id}" style="gap:0.35rem;">
+              <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Coconut Milk')">Coconut Milk</span>
+              <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Oat Milk')">Oat Milk</span>
             </div>
-            <div style="margin-bottom:0.75rem;">
-              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Add Garnish <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
-              <div class="chip-group" id="garnish-${p.id}" style="gap:0.35rem;"></div>
-            </div>
-          ` : !p.soldOut && p.dairyFreeOption ? `
-            <div style="margin-bottom:0.75rem;">
-              <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Make it Dairy Free <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
-              <div class="chip-group" id="dairy-${p.id}" style="gap:0.35rem;">
-                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Coconut Milk')">Coconut Milk</span>
-                <span class="chip" style="font-size:0.6rem;padding:0.3rem 0.6rem;" onclick="toggleDairyChip(this, '${p.id}', 'Oat Milk')">Oat Milk</span>
-              </div>
-            </div>
-          ` : ""}
-          ${p.soldOut
-            ? `<button class="sold-out-btn" disabled>Sold Out</button>`
-            : `<button class="add-to-cart-btn" id="btn-${p.id}" onclick="addProductToCart('${p.id}')">Add to Cart</button>`
-          }
+          </div>
+          <div style="margin-bottom:0.75rem;">
+            <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:0.4rem;">Add Garnish <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></div>
+            <div class="chip-group" id="garnish-${p.id}" style="gap:0.35rem;"></div>
+          </div>
+          <button class="add-to-cart-btn" id="btn-${p.id}" onclick="addProductToCart('${p.id}')">Add to Cart</button>
         </div>
       </div>
     `).join("");
 
-    if (hasGarnish) {
-      products.forEach(p => {
-        if (p.soldOut) return;
-        const container = document.getElementById(`garnish-${p.id}`);
-        if (!container) return;
-        GARNISH_OPTIONS.forEach(g => {
-          const chip = document.createElement("span");
-          chip.className = "chip";
-          chip.textContent = g;
-          chip.style.fontSize = "0.6rem";
-          chip.style.padding = "0.3rem 0.6rem";
-          chip.onclick = () => chip.classList.toggle("selected");
-          container.appendChild(chip);
-        });
+    products.forEach(p => {
+      const container = document.getElementById(`garnish-${p.id}`);
+      if (!container) return;
+      GARNISH_OPTIONS.forEach(g => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = g;
+        chip.style.fontSize = "0.6rem";
+        chip.style.padding = "0.3rem 0.6rem";
+        chip.onclick = () => chip.classList.toggle("selected");
+        container.appendChild(chip);
       });
-    }
+    });
   }
 
   function toggleDairyChip(chip, productId, milk) {
@@ -580,35 +531,20 @@
 
   // ── ADD PRODUCT TO CART ──
   function addProductToCart(id) {
-    const product = [...SODAS, ...BOTTLES].find(p => p.id === id);
-    if (!product || product.soldOut) return;
+    const product = SODAS.find(p => p.id === id);
+    if (!product) return;
 
-    let garnishes = [];
-    if (product.type === "soda") {
-      const container = document.getElementById(`garnish-${id}`);
-      if (container) {
-        garnishes = [...container.querySelectorAll(".chip.selected")].map(c => c.textContent);
-      }
-    }
+    const container = document.getElementById(`garnish-${id}`);
+    const garnishes = container ? [...container.querySelectorAll(".chip.selected")].map(c => c.textContent) : [];
+    const garnishCost = Math.max(0, garnishes.length - GARNISH_FREE) * GARNISH_EXTRA_COST;
 
-    let garnishCost = 0;
-    if (garnishes.length > 0) {
-      garnishCost = Math.max(0, garnishes.length - GARNISH_FREE) * GARNISH_EXTRA_COST;
-    }
-
-    let dairyFree = "";
-    if (product.type === "soda" || product.dairyFreeOption) {
-      const dairyContainer = document.getElementById(`dairy-${id}`);
-      if (dairyContainer) {
-        const selected = dairyContainer.querySelector(".chip.selected");
-        if (selected) dairyFree = selected.textContent;
-      }
-    }
+    const dairyContainer = document.getElementById(`dairy-${id}`);
+    const dairySelected = dairyContainer ? dairyContainer.querySelector(".chip.selected") : null;
+    const dairyFree = dairySelected ? dairySelected.textContent : "";
 
     const detailParts = [];
     if (dairyFree) detailParts.push(`Dairy Free: ${dairyFree}`);
     if (garnishes.length) detailParts.push(`Garnishes: ${garnishes.join(", ")}`);
-    const detail = detailParts.join(" · ");
 
     addToCartItem({
       id: `${id}-${Date.now()}`,
@@ -616,7 +552,7 @@
       name: product.name,
       img: product.img,
       price: product.price + garnishCost,
-      detail,
+      detail: detailParts.join(" · "),
       type: product.type,
       qty: 1,
     });
@@ -631,22 +567,12 @@
     updateCartUI();
   }
 
-  // ── BUNDLE CALCULATION ──
-  function getBundleInfo() {
-    const bottleItems = cart.filter(i => i.type === "bottle");
-    const bottleCount = bottleItems.reduce((s, i) => s + i.qty, 0);
-    const bundles = Math.floor(bottleCount / BUNDLE_COUNT);
-    const saving = bundles > 0 ? (bundles * BUNDLE_COUNT * 5) - (bundles * BUNDLE_PRICE) : 0;
-    return { bundles, saving };
-  }
-
   function getSubtotal() {
     return cart.reduce((s, i) => s + i.price * i.qty, 0);
   }
 
   function getTotal() {
-    const { saving } = getBundleInfo();
-    return getSubtotal() - saving + (fulfillment === "delivery" ? DELIVERY_FEE : 0);
+    return getSubtotal() + (fulfillment === "delivery" ? DELIVERY_FEE : 0);
   }
 
   function getCartCount() {
@@ -655,7 +581,6 @@
 
   function updateCartUI() {
     const count = getCartCount();
-    const { saving } = getBundleInfo();
     const subtotal = getSubtotal();
     const total = getTotal();
 
@@ -664,14 +589,6 @@
     document.getElementById("subtotal-display").textContent = `$${subtotal.toFixed(2)}`;
     document.getElementById("cart-total-display").textContent = `$${total.toFixed(2)}`;
     document.getElementById("cart-bar").classList.toggle("visible", count > 0);
-
-    const bundleRow = document.getElementById("bundle-saving-row");
-    if (saving > 0) {
-      bundleRow.classList.add("visible");
-      document.getElementById("bundle-saving-amount").textContent = `-$${saving.toFixed(2)}`;
-    } else {
-      bundleRow.classList.remove("visible");
-    }
   }
 
   function renderCartItems() {
@@ -787,7 +704,6 @@
       const result = await card.tokenize();
       if (result.status !== "OK") throw new Error(result.errors?.[0]?.message || "Card error");
 
-      const { saving } = getBundleInfo();
       const response = await fetch("/.netlify/functions/process-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -795,7 +711,7 @@
           sourceId: result.token,
           amount: Math.round(getTotal() * 100),
           items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price, detail: i.detail || "" })),
-          bundleSaving: saving,
+          bundleSaving: 0,
           fulfillment,
           deliveryAddress: fulfillment === "delivery" ? document.getElementById("delivery-address").value.trim() : null,
           deliveryInstructions: fulfillment === "delivery" ? document.getElementById("delivery-instructions").value.trim() : null,
